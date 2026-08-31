@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DHI-PHRIA2.5-PL | Dahua LED Poster Screen</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #fff;
+      color: #222;
+      width: 210mm;
+      margin: 0 auto;
+      padding: 12mm 14mm;
+      font-size: 9pt;
+    }
+
+    /* ── Hero Banner ── */
+    .hero {
+      background: linear-gradient(135deg, #1a5c8a 0%, #0d3b5e 100%);
+      border-radius: 8px;
+      padding: 0 28px;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .hero-logo img {
+      height: 75px;
+      width: auto;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+    }
+
+    .hero-text {
+      text-align: right;
+      color: #fff;
+    }
+
+    .hero-line1 {
+      font-size: 15pt;
+      font-weight: 700;
+      color: rgba(255,255,255,0.95);
+      margin-bottom: 4px;
+    }
+
+    .hero-line2 {
+      font-size: 10pt;
+      font-weight: 400;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* ── Header bar (Lalla logo) ── */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #4db840;
+    }
+
+    .top-bar img {
+      height: 44px;
+      width: auto;
+      mix-blend-mode: multiply;
+    }
+
+    .top-bar-contact {
+      font-size: 8pt;
+      color: #555;
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    /* ── Two column layout ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .product-image img {
+      width: 100%;
+      border-radius: 8px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── Features box ── */
+    .features-box {
+      background: #f9f9f9;
+      border-radius: 8px;
+      padding: 16px 18px;
+      border: 1px solid #e8e8e8;
+    }
+
+    .feat-header {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 8px;
+    }
+
+    .feat-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 10px 0;
+    }
+
+    .feat-list li {
+      padding: 4px 0 4px 16px;
+      position: relative;
+      font-size: 8.5pt;
+      color: #333;
+      line-height: 1.5;
+      border-bottom: 1px solid #eee;
+    }
+
+    .feat-list li:last-child { border-bottom: none; }
+
+    .feat-list li::before {
+      content: '•';
+      position: absolute;
+      left: 3px;
+      color: #4db840;
+      font-weight: 700;
+    }
+
+    .feat-divider {
+      border: none;
+      border-top: 1px solid #e0e0e0;
+      margin: 10px 0;
+    }
+
+    /* Icon badges */
+    .feat-icons-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .feat-icon-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      border: 1.5px solid #ccc;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 7pt;
+      color: #444;
+      text-align: center;
+      min-width: 48px;
+      background: #fff;
+    }
+
+    .feat-icon-badge svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .feat-icon-badge small {
+      font-size: 6pt;
+      color: #888;
+      display: block;
+      line-height: 1.2;
+    }
+
+    /* ── Showcase image ── */
+    .showcase {
+      margin-bottom: 18px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .showcase img {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+    }
+
+    /* ── Highlights ── */
+    .highlights-box {
+      background: #f9f9f9;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      border: 1px solid #e8e8e8;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      page-break-before: always;
+      break-before: page;
+      margin-top: 18mm;
+    }
+
+    .section-title {
+      font-size: 9pt;
+      font-weight: 700;
+      color: #3a9430;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #4db840;
+    }
+
+    .highlight-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .highlight-list li {
+      padding: 5px 0 5px 18px;
+      position: relative;
+      font-size: 8.5pt;
+      color: #333;
+      line-height: 1.6;
+      border-bottom: 1px solid #eee;
+    }
+
+    .highlight-list li:last-child { border-bottom: none; }
+
+    .highlight-list li::before {
+      content: '•';
+      position: absolute;
+      left: 4px;
+      color: #4db840;
+      font-weight: 700;
+      font-size: 11pt;
+      line-height: 1.3;
+    }
+
+    /* ── Specs Table ── */
+    .specs-box {
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px 18px;
+      border: 1px solid #e8e8e8;
+      margin-bottom: 18px;
+    }
+
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 7.8pt;
+    }
+
+    .specs-table thead tr {
+      background: #4db840;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .specs-table thead th {
+      padding: 6px 10px;
+      text-align: left;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.3px;
+    }
+
+    .specs-table tbody tr:nth-child(even) {
+      background: #f7fdf6;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .specs-table td {
+      padding: 5px 10px;
+      border-bottom: 1px solid #eee;
+      vertical-align: top;
+    }
+
+    .specs-table td:first-child,
+    .specs-table td:nth-child(3) {
+      font-weight: 600;
+      color: #444;
+      width: 22%;
+    }
+
+    .specs-table td:nth-child(2),
+    .specs-table td:nth-child(4) {
+      color: #222;
+      width: 28%;
+    }
+
+    /* ── Contact Footer ── */
+    .contact {
+      margin-top: 14px;
+      padding: 12px 18px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      border-left: 4px solid #4db840;
+      text-align: center;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .contact p {
+      font-size: 9pt;
+      color: #333;
+      font-weight: 500;
+    }
+
+    /* ── Print settings ── */
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    @media print {
+      body { padding: 12mm 14mm; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top bar with Lalla logo -->
+  <div class="top-bar">
+    <img src="../assets/Logo.jpg" alt="Lalla ลัลลา" />
+    <div class="top-bar-contact">
+      จัดจำหน่ายโดย บริษัท ลัลลา (ประเทศไทย) จำกัด<br/>
+      ติดต่อ คุณ นิจรินทร์ กิจสกุล &nbsp;|&nbsp; โทร. 081-491-3538
+    </div>
+  </div>
+
+  <!-- Hero Banner -->
+  <div class="hero">
+    <div class="hero-logo">
+      <img src="../assets/S__37855236.jpg" alt="Dahua Technology" />
+    </div>
+    <div class="hero-text">
+      <div class="hero-line1">Dahua LED Poster Screen</div>
+      <div class="hero-line2">DHI-PHRIA2.5-PL</div>
+    </div>
+  </div>
+
+  <!-- Image + Features -->
+  <div class="two-col">
+    <div class="product-image">
+      <img src="../assets/S__101974037.jpg" alt="DHI-PHRIA2.5-PL" />
+    </div>
+    <div class="features-box">
+      <p class="feat-header">Features:</p>
+      <ul class="feat-list">
+        <li>GOB (Glue on Board) technology.</li>
+        <li>Supports folding up and down, double-sided display.</li>
+        <li>The frame is foldable, allowing for seamless splicing of multiple units.</li>
+        <li>Plug and play, any video automatically plays full screen, zero setting, quick and simple.</li>
+        <li>User-lever front maintenance, all-weather protection technology, anti-broken LED, moisture-proof, anti-static, radiation-proof, wear-resisting and high-efficiency heat dissipation.</li>
+      </ul>
+      <hr class="feat-divider" />
+      <div class="feat-icons-row">
+        <div class="feat-icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="7" width="6" height="10" rx="1" fill="#e53935"/><rect x="9" y="7" width="6" height="10" rx="1" fill="#43a047"/><rect x="16" y="7" width="6" height="10" rx="1" fill="#1e88e5"/></svg>
+          <span>RGB<br/><small>Rich Colour</small></span>
+        </div>
+        <div class="feat-icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="6" width="20" height="12" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M18 18v2M6 18v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M6 10h12M6 14h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span>HDMI</span>
+        </div>
+        <div class="feat-icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5C6.8 10.2 9.2 9 12 9s5.2 1.2 7 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 15.5c1.1-1.2 2.4-1.9 4-1.9s2.9.7 4 1.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="19" r="1.5" fill="currentColor"/></svg>
+          <span>Wireless</span>
+        </div>
+        <div class="feat-icon-badge">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M8 20h8M12 17v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <span>No Seam</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Showcase Image -->
+  <div class="showcase">
+    <img src="../assets/S__102096898.jpg" alt="Showcase" />
+  </div>
+
+  <!-- Highlight Features -->
+  <div class="highlights-box">
+    <div class="section-title">Highlight Features</div>
+    <ul class="highlight-list">
+      <li>รองรับ การพับขึ้น-ลงของตัวจอ</li>
+      <li>สามารถ แสดงผลได้สองด้าน (Double-Sided Display)</li>
+      <li>โครงสร้างจอ สามารถพับได้ และนำหลายเครื่องมาต่อกันแบบไร้รอยต่อ (Seamless Splicing) เพื่อสร้างจอขนาดใหญ่</li>
+      <li>เมื่อเชื่อมต่อวิดีโอ ระบบจะแสดงผลเต็มหน้าจออัตโนมัติ</li>
+      <li>ไม่ต้องตั้งค่าซับซ้อน ใช้งานได้รวดเร็วและสะดวก</li>
+      <li>รองรับการ ซ่อมบำรุงจากด้านหน้า (Front Maintenance)</li>
+      <li>ถอดหรือซ่อมได้ง่ายโดยไม่ต้องรื้อด้านหลัง</li>
+    </ul>
+  </div>
+
+  <!-- Technical Specifications -->
+  <div class="specs-box">
+    <div class="section-title">Technical Specifications</div>
+    <table class="specs-table">
+      <thead>
+        <tr>
+          <th>Parameter</th><th>Value</th>
+          <th>Parameter</th><th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Model</strong></td><td>DHI-PHRIA2.5-PL</td><td><strong>Overall Dimension (W×H×D)</strong></td><td>664mm×2074mm×440mm</td></tr>
+        <tr><td><strong>Pixel Pitch</strong></td><td>2.5mm</td><td><strong>Viewing Area (W×H×D)</strong></td><td>640mm×1920mm×62mm</td></tr>
+        <tr><td><strong>Screen Size</strong></td><td>80 inch</td><td><strong>Screen Resolution (W×H)</strong></td><td>256×768</td></tr>
+        <tr><td><strong>Module Size (W×H)</strong></td><td>320×160mm</td><td><strong>Screen Material</strong></td><td>Die-cast Aluminum+Profile</td></tr>
+        <tr><td><strong>Module Resolution (W×H)</strong></td><td>128×64</td><td><strong>Screen Weight</strong></td><td>50 kg</td></tr>
+        <tr><td><strong>Pixel Type</strong></td><td>1R1G1B (GOB)</td><td><strong>Pixel Density</strong></td><td>196,608 dots/Panel</td></tr>
+        <tr><td><strong>LED Type</strong></td><td>SMD2121</td><td><strong>Brightness (Max)</strong></td><td>600 nit</td></tr>
+        <tr><td><strong>Grey Level</strong></td><td>12–14 bits</td><td><strong>Refresh Rate</strong></td><td>3840 Hz</td></tr>
+        <tr><td><strong>Contrast</strong></td><td>4000:1</td><td><strong>Response Time</strong></td><td>≤0.5ms (Typ)</td></tr>
+        <tr><td><strong>Viewing Angle</strong></td><td>160°/140°</td><td><strong>Ingress Protection</strong></td><td>IP40</td></tr>
+        <tr><td><strong>Input Voltage</strong></td><td>AC 200~240V (+/-10%)</td><td><strong>Operating Temp/Humidity</strong></td><td>-10°C~+40°C / 10%~80%RH</td></tr>
+        <tr><td><strong>Storage Temp/Humidity</strong></td><td>-20°C~+50°C / 10%~80%RH</td><td><strong>Input Power (max)</strong></td><td>600 W/m²</td></tr>
+        <tr><td><strong>Input Power (avg)</strong></td><td>200 W/m²</td><td><strong>Video Interface</strong></td><td>HDMIx2 (1in1out), USB 3.0×1</td></tr>
+        <tr><td><strong>Audio Interface</strong></td><td>Audio Out ×1</td><td><strong>Communication</strong></td><td>USB / WiFi / Ethernet</td></tr>
+        <tr><td><strong>Installation Mode</strong></td><td>Movable Base</td><td><strong>Maintenance Mode</strong></td><td>Front Maintenance</td></tr>
+        <tr><td><strong>Accessories</strong></td><td>Spare Parts</td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Contact Footer -->
+  <div class="contact">
+    <p>จัดจำหน่ายโดย บริษัท ลัลลา (ประเทศไทย) จำกัด &nbsp;|&nbsp; ติดต่อ คุณ นิจรินทร์ กิจสกุล &nbsp;|&nbsp; โทร. 081-491-3538</p>
+  </div>
+
+</body>
+</html>

@@ -3,51 +3,161 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lalla ลัลลา</title>
+  <meta name="description" content="Lalla ลัลลา — ตัวแทนจำหน่าย Dahua, Samsung Smart Signage และ MAXHUB จอ LED จอสัมผัส ป้ายดิจิทัล และระบบกล้องวงจรปิด พร้อมบริการติดตั้งทั่วประเทศ" />
+  <title>Lalla ลัลลา — Display &amp; Security Solutions</title>
+  <link rel="icon" href="assets/Logo.jpg" />
+  <link rel="preload" href="assets/fonts/FCIconic-Regular.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/FCIconic-Bold.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- Header with Logo top-right -->
-  <header>
-    <img src="assets/Logo.jpg" alt="Lalla ลัลลา" class="logo" />
-  </header>
+  <div id="nav-slot"></div>
 
-  <!-- Home Page -->
-  <main class="page-home">
-    <h1>Our Products</h1>
-    <div id="product-list"></div>
+  <div class="ribbon">
+    ตัวแทนจำหน่ายอย่างเป็นทางการ <strong>Dahua · Samsung · MAXHUB</strong> —
+    <a href="tel:0814913538">ปรึกษาผู้เชี่ยวชาญ 081-491-3538 ›</a>
+  </div>
+
+  <main>
+
+    <!-- ══════════ HERO ══════════ -->
+    <section class="hero" id="top">
+      <div class="wrap hero-copy">
+        <p class="t-eyebrow">One Stop Display Solution Provider</p>
+        <h1 class="t-display">จอภาพที่ใช่<br />สำหรับทุกพื้นที่</h1>
+        <p class="t-lead th">
+          เราไม่ได้ขายแค่จอ แต่ดูแลทุกอย่างรอบตัวจอ — สำรวจหน้างาน เขียนแบบ
+          ติดตั้งโดยทีมของเราเอง อบรมการใช้งาน และดูแลหลังการขายทั่วประเทศ
+        </p>
+        <div class="cta-row">
+          <a class="link link-lg" href="#brands">เลือกตามแบรนด์</a>
+          <a class="link link-lg" href="#featured">สินค้าแนะนำ</a>
+        </div>
+      </div>
+      <div class="hero-stage">
+        <img src="assets/cutout/poster-wall.png" alt="จอ LED ต่อกันแบบไร้รอยต่อ" />
+      </div>
+    </section>
+
+    <!-- ══════════ BRANDS ══════════ -->
+    <section class="section" id="brands">
+      <div class="wrap-wide">
+        <header class="center reveal" style="margin-bottom:44px;">
+          <p class="t-eyebrow">Our Partnership</p>
+          <h2 class="t-headline">แบรนด์ที่เราเป็นตัวแทน</h2>
+          <p class="t-lead th" style="max-width:720px;margin:14px auto 0;">
+            ตัวแทนจำหน่ายอย่างเป็นทางการสามแบรนด์ และจัดหาได้จากผู้ผลิตชั้นนำทุกราย
+          </p>
+        </header>
+        <div class="brand-grid" id="brand-grid"></div>
+      </div>
+    </section>
+
+    <!-- ══════════ FEATURED ══════════ -->
+    <section class="section bg-alt" id="featured">
+      <div class="wrap-wide">
+        <header class="center reveal" style="margin-bottom:44px;">
+          <p class="t-eyebrow">Featured</p>
+          <h2 class="t-headline">สินค้าแนะนำ</h2>
+          <p class="t-lead th" style="max-width:620px;margin:14px auto 0;">
+            รุ่นที่ได้รับความนิยมและเหมาะกับงานส่วนใหญ่
+          </p>
+        </header>
+        <div class="mgrid" id="featured-grid"></div>
+      </div>
+    </section>
+
+
+    <!-- ══════════ ABOUT ══════════ -->
+    <section class="section" id="about">
+      <div class="wrap-wide">
+        <div class="about-split reveal">
+          <div class="about-copy">
+            <p class="t-eyebrow">About Us</p>
+            <h2 class="t-headline">เราส่งมอบทั้งจอ<br />และทุกอย่างรอบตัวจอ</h2>
+            <p class="t-body th">
+              บริษัท ลัลลา (ประเทศไทย) จำกัด เป็นผู้จำหน่ายและผู้รับติดตั้งระบบจอภาพ
+              สำนักงานอยู่ที่จังหวัดนนทบุรี ให้บริการโรงเรียน มหาวิทยาลัย สถานีโทรทัศน์
+              สำนักงาน และศาสนสถานทั่วประเทศไทย
+            </p>
+            <p class="t-body th">
+              เราเป็นตัวแทนจำหน่ายอย่างเป็นทางการของ <strong>Dahua</strong>,
+              <strong>Samsung</strong> และ <strong>MAXHUB</strong>
+              และจัดหาจากผู้ผลิตชั้นนำทุกราย — สเปกจึงถูกเลือกตามหน้างาน ไม่ใช่ตามของที่มีในสต็อก
+            </p>
+            <div class="cta-row">
+              <a class="link link-lg" href="#works">ดูผลงานติดตั้ง</a>
+              <a class="link link-lg" href="#process">ขั้นตอนการทำงาน</a>
+            </div>
+          </div>
+          <div class="capability-grid" id="capability-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ HOW WE WORK ══════════ -->
+    <section class="section bg-alt" id="process">
+      <div class="wrap-wide">
+        <header class="center reveal" style="margin-bottom:44px;">
+          <p class="t-eyebrow">How We Work</p>
+          <h2 class="t-headline">แปดขั้นตอน ทุกโครงการ</h2>
+          <p class="t-lead th" style="max-width:640px;margin:14px auto 0;">
+            สำรวจ · เขียนแบบ · หารือ · งานโครงสร้าง · ติดตั้ง · ตั้งค่า · เก็บงาน · อบรม
+          </p>
+        </header>
+        <div class="step-grid" id="step-grid"></div>
+      </div>
+    </section>
+    <!-- ══════════ OUR WORKS ══════════ -->
+    <section class="section" id="works">
+      <div class="wrap-wide">
+        <header class="center reveal" style="margin-bottom:44px;">
+          <p class="t-eyebrow">Our Project Reference</p>
+          <h2 class="t-headline">ผลงานติดตั้งของเรา</h2>
+          <p class="t-lead th" style="max-width:620px;margin:14px auto 0;">
+            โรงเรียน มหาวิทยาลัย และศาสนสถานทั่วประเทศ
+          </p>
+        </header>
+        <div class="works-grid" id="works-grid"></div>
+      </div>
+    </section>
+
+    <!-- ══════════ SUPPORT ══════════ -->
+    <section class="section bg-alt" id="support">
+      <div class="wrap">
+        <header class="center reveal" style="margin-bottom:48px;">
+          <p class="t-eyebrow">Service &amp; Support</p>
+          <h2 class="t-headline">ซื้อกับลัลลา ได้มากกว่าจอ</h2>
+        </header>
+        <div class="support-grid reveal" id="support-grid"></div>
+      </div>
+    </section>
+
+    <!-- ══════════ CONTACT ══════════ -->
+    <section class="section" id="contact">
+      <div class="wrap">
+        <div class="contact-card reveal">
+          <h2 class="t-headline">Contact Us</h2>
+          <p class="th">
+            ส่งข้อมูลห้องหรือพื้นที่มาให้เรา แล้วเราจะส่งผลสำรวจ แบบติดตั้ง
+            และราคากลับไป ก่อนที่คุณจะตัดสินใจ
+          </p>
+          <div class="contact-actions" id="contact-actions"></div>
+          <div class="contact-detail" id="contact-detail"></div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <script src="js/products.js"></script>
-  <script>
-    const list = document.getElementById('product-list');
+  <div id="footer-slot"></div>
 
-    products.forEach(product => {
-      const card = document.createElement('a');
-      card.href = `product.html?id=${product.id}`;
-      card.className = 'product-card';
-
-      const hasImage = product.coverImage;
-
-      card.innerHTML = `
-        <div class="product-card-image ${hasImage ? '' : 'placeholder'}">
-          ${hasImage
-            ? `<img src="${product.coverImage}" alt="${product.name}" />`
-            : `<span>[ Product Image ]</span>`
-          }
-        </div>
-        <div class="product-card-body">
-          <div class="product-card-category">${product.category}</div>
-          <div class="product-card-name">${product.name}</div>
-          <div class="product-card-subtitle">${product.subtitle}</div>
-          <span class="product-card-arrow">View details &rarr;</span>
-        </div>
-      `;
-
-      list.appendChild(card);
-    });
-  </script>
+  <script src="js/brands.js"></script>
+  <script src="js/featured.js"></script>
+  <script src="js/works.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/home.js"></script>
 
 </body>
 </html>

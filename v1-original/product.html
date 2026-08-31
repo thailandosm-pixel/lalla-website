@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Detail | Lalla ลัลลา</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Header with Logo top-right -->
+  <header>
+    <a href="index.html"><img src="assets/Logo.jpg" alt="Lalla ลัลลา" class="logo" /></a>
+  </header>
+
+  <!-- Product Detail Page -->
+  <main class="page-detail" id="detail-root">
+    <p style="color:#999;">Loading...</p>
+  </main>
+
+  <script src="js/products.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    const product = products.find(p => p.id === id);
+    const root = document.getElementById('detail-root');
+
+    if (!product) {
+      root.innerHTML = `
+        <a class="detail-back" href="index.html">&#8592; Back to Products</a>
+        <p style="color:#999;">Product not found.</p>
+      `;
+    } else {
+      document.title = `${product.name} | Lalla ลัลลา`;
+
+      // Build features HTML
+      const featureContent = product.descriptionHtml ||
+        (product.features ? `<ul class="features-list">${product.features.map(f => `<li>${f}</li>`).join('')}</ul>` : '');
+
+      // Build showcase section (image + highlights as 2 separate sections)
+      const showcaseHtml = [
+        product.showcaseImage ? `
+          <div class="detail-showcase-image">
+            <img src="${product.showcaseImage}" alt="${product.name} showcase" class="showcase-image" />
+          </div>` : '',
+        product.highlightFeatures ? `
+          <div class="detail-showcase-highlights">
+            <ul class="highlight-list">
+              ${product.highlightFeatures.map(f => `<li>${f}</li>`).join('')}
+            </ul>
+          </div>` : ''
+      ].join('');
+
+      // Build specs rows (split into two halves for two-column table)
+      const half = Math.ceil(product.specs.length / 2);
+      const leftSpecs = product.specs.slice(0, half);
+      const rightSpecs = product.specs.slice(half);
+
+      const maxRows = Math.max(leftSpecs.length, rightSpecs.length);
+      let specRows = '';
+      for (let i = 0; i < maxRows; i++) {
+        const l = leftSpecs[i] || null;
+        const r = rightSpecs[i] || null;
+        specRows += `<tr>
+          <td>${l ? `<strong>${l.label}</strong>` : ''}</td>
+          <td>${l ? l.value : ''}</td>
+          <td>${r ? `<strong>${r.label}</strong>` : ''}</td>
+          <td>${r ? r.value : ''}</td>
+        </tr>`;
+      }
+
+      // Product images
+      const imgSources = product.images || (product.coverImage ? [product.coverImage] : []);
+      const imageBlock = imgSources.length > 0
+        ? imgSources.map(src => `<img src="${src}" alt="${product.name}" style="border-radius:8px;width:100%;object-fit:cover;" />`).join('')
+        : `<div class="detail-img-placeholder">[ Product Image ]</div>`;
+
+      root.innerHTML = `
+        <a class="detail-back" href="index.html">&#8592; Back to Products</a>
+
+        <!-- Hero Banner -->
+        <div class="detail-hero">
+          ${product.brandLogo ? `<div class="detail-hero-logo"><img src="${product.brandLogo}" alt="Brand Logo" /></div>` : ''}
+          <div class="detail-hero-text">
+            <div class="detail-category">${product.category}</div>
+            <div class="detail-hero-line1">${product.subtitle}</div>
+            <div class="detail-hero-line2">${product.name}</div>
+          </div>
+        </div>
+
+        <!-- Images + Features -->
+        <div class="detail-body">
+          <div class="detail-images">
+            ${imageBlock}
+          </div>
+          <div class="detail-features">
+            ${featureContent}
+          </div>
+        </div>
+
+        ${showcaseHtml}
+
+        <!-- Technical Specifications -->
+        <div class="detail-specs">
+          <div class="section-title">Technical Specifications</div>
+          <table class="specs-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+                <th>Parameter</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>${specRows}</tbody>
+          </table>
+        </div>
+
+        <!-- Contact Footer -->
+        <div class="detail-contact">
+          <p>จัดจำหน่ายโดย บริษัท ลัลลา (ประเทศไทย) จำกัด &nbsp;|&nbsp; ติดต่อ คุณ นิจรินทร์ กิจสกุล &nbsp;|&nbsp; โทร. 081-491-3538</p>
+        </div>
+      `;
+    }
+  </script>
+
+</body>
+</html>

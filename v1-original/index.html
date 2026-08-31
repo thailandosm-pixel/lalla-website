@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lalla ลัลลา</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Header with Logo top-right -->
+  <header>
+    <img src="assets/Logo.jpg" alt="Lalla ลัลลา" class="logo" />
+  </header>
+
+  <!-- Home Page -->
+  <main class="page-home">
+    <h1>Our Products</h1>
+    <div id="product-list"></div>
+  </main>
+
+  <script src="js/products.js"></script>
+  <script>
+    const list = document.getElementById('product-list');
+
+    products.forEach(product => {
+      const card = document.createElement('a');
+      card.href = `product.html?id=${product.id}`;
+      card.className = 'product-card';
+
+      const hasImage = product.coverImage;
+
+      card.innerHTML = `
+        <div class="product-card-image ${hasImage ? '' : 'placeholder'}">
+          ${hasImage
+            ? `<img src="${product.coverImage}" alt="${product.name}" />`
+            : `<span>[ Product Image ]</span>`
+          }
+        </div>
+        <div class="product-card-body">
+          <div class="product-card-category">${product.category}</div>
+          <div class="product-card-name">${product.name}</div>
+          <div class="product-card-subtitle">${product.subtitle}</div>
+          <span class="product-card-arrow">View details &rarr;</span>
+        </div>
+      `;
+
+      list.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>

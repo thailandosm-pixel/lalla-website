@@ -265,7 +265,9 @@ function renderRich(product) {
     <section class="section-tight" id="highlights">
       <div class="wrap-wide"><header class="reveal" style="margin-bottom:30px;">
         <h2 class="t-title">จุดเด่นของรุ่นนี้</h2></header></div>
-      <div class="hl-row">
+      <!-- tabindex + group role: a horizontally scrolling region has to be
+           reachable and scrollable by keyboard alone (WCAG 2.1.1) -->
+      <div class="hl-row" tabindex="0" role="group" aria-label="จุดเด่นของรุ่นนี้">
         ${product.highlights.map(h => `
           <article class="hl-card">
             <div class="hl-card-icon">${icon(h.icon)}</div>

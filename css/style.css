@@ -1911,3 +1911,96 @@ body.quote-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .quote-drawer, .quote-overlay { transition: none; }
 }
+
+/* ============================================================
+   Phone: swipe rows
+   ------------------------------------------------------------
+   On a phone the home page is a very long vertical scroll, so each
+   card section turns into one horizontal row instead. Cards are
+   sized below 100% width on purpose: the next card peeks in at the
+   right edge, which is what tells a visitor the row keeps going.
+   Desktop and tablet are untouched - everything here is inside the
+   phone media query, and the desktop grid rules still apply above it.
+   ============================================================ */
+/* the swipe hint only ever shows on a phone (set to block below) */
+.swipe-hint { display: none; }
+
+@media (max-width: 734px) {
+  .swipe-row {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: none;        /* drop the desktop column track */
+    grid-template-rows: auto;
+    grid-auto-columns: 76%;             /* ~24% of the next card shows */
+    gap: 12px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;     /* don't rubber-band the whole page */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+
+    /* bleed out of .wrap so the row runs edge to edge, while the
+       first card still lines up with the text above it */
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    padding-bottom: 16px;
+    scroll-padding-inline: var(--gutter);
+  }
+
+  .swipe-row > * {
+    scroll-snap-align: start;
+    min-width: 0;                       /* let long words wrap inside a card */
+  }
+
+  /* keyboard users get the same access as a swipe (WCAG 2.1.1),
+     and need to see where focus landed */
+  .swipe-row:focus-visible {
+    outline: 2px solid var(--green-dark);
+    outline-offset: 3px;
+    border-radius: var(--radius);
+  }
+
+  /* thin, unobtrusive scrollbar where the platform draws one */
+  .swipe-row { scrollbar-width: thin; scrollbar-color: var(--hairline) transparent; }
+  .swipe-row::-webkit-scrollbar { height: 4px; }
+  .swipe-row::-webkit-scrollbar-thumb {
+    background: var(--hairline);
+    border-radius: 999px;
+  }
+
+  /* Per-row card widths: wider cards for image-led rows, narrower
+     for compact ones, each still leaving a visible peek. */
+  .brand-grid.swipe-row      { grid-auto-columns: 78%; }
+  .mgrid.swipe-row           { grid-auto-columns: 58%; gap: 10px; }
+  .capability-grid.swipe-row { grid-auto-columns: 62%; }
+  .step-grid.swipe-row       { grid-auto-columns: 70%; }
+  .works-grid.swipe-row      { grid-auto-columns: 84%; gap: 14px; }
+  .support-grid.swipe-row    { grid-auto-columns: 66%; gap: 16px; }
+
+  /* cards in a swipe row stretch to equal height */
+  .swipe-row .brand-card,
+  .swipe-row .mcard,
+  .swipe-row .step-card,
+  .swipe-row .work-card,
+  .swipe-row .cap-item,
+  .swipe-row .support-item { height: 100%; }
+
+  /* these were tuned for a vertical stack */
+  .brand-card { min-height: 0; }
+  .support-grid.swipe-row { text-align: left; }
+  .support-grid.swipe-row .support-item svg { margin-left: 0; margin-right: 0; }
+
+  /* the hint line under each section heading */
+  .swipe-hint {
+    display: block;
+    font-size: 12px;
+    color: var(--text-2);
+    margin: 10px 0 2px;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .swipe-row { scroll-behavior: auto; }
+}

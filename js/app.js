@@ -266,6 +266,43 @@ function setPageMeta({ title, description, image } = {}) {
   }
 }
 
+/* ── Phone swipe rows ──────────────────────────────────────────
+   On a phone, .swipe-row sections scroll sideways (see style.css).
+   A region that scrolls has to be reachable by keyboard too, so the
+   row takes focus and names itself - but only while it is actually
+   scrolling, so desktop keeps its plain grid with no extra tab stop. */
+function initSwipeRows(root = document) {
+  const rows = root.querySelectorAll('.swipe-row');
+  if (!rows.length) return;
+  const phone = window.matchMedia('(max-width: 734px)');
+
+  const apply = () => {
+    rows.forEach(row => {
+      if (phone.matches) {
+        const heading = row.closest('section')?.querySelector('h2, h3');
+        const name = heading ? heading.textContent.trim().replace(/\s+/g, ' ') : 'รายการ';
+        row.setAttribute('tabindex', '0');
+        row.setAttribute('role', 'group');
+        row.setAttribute('aria-label', name + ' — เลื่อนไปทางขวาเพื่อดูเพิ่มเติม');
+        if (!row.previousElementSibling?.classList.contains('swipe-hint')) {
+          const hint = document.createElement('span');
+          hint.className = 'swipe-hint';
+          hint.setAttribute('aria-hidden', 'true');
+          hint.textContent = 'ปัดไปทางขวาเพื่อดูทั้งหมด ›';
+          row.parentNode.insertBefore(hint, row);
+        }
+      } else {
+        row.removeAttribute('tabindex');
+        row.removeAttribute('role');
+        row.removeAttribute('aria-label');
+      }
+    });
+  };
+
+  apply();
+  phone.addEventListener('change', apply);
+}
+
 /* ── Utilities ── */
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));

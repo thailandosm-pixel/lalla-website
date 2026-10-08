@@ -148,5 +148,6 @@ if (cd) {
     <p><a href="mailto:${SITE.email}">${SITE.email}</a></p>`;
 }
 
+initSwipeRows();
 initReveal();
 initScrollSpy('.nav-links a');

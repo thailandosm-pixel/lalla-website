@@ -16,29 +16,39 @@ const PAGES = [
 ];
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'];
 
+// The phone layout is materially different (sections become horizontal
+// swipe rows), so both widths have to be checked, not just the desktop one.
+const VIEWPORTS = [
+  { name: 'desktop', width: 1280, height: 900 },
+  { name: 'phone',   width: 390,  height: 844 },
+];
+
 const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
 let total = 0;
 
-for (const path of PAGES) {
-  const page = await browser.newPage();
-  await page.setViewport({ width: 1280, height: 900 });
-  await page.goto(BASE + path, { waitUntil: 'networkidle0', timeout: 60000 });
-  // the pages render from JS; give the templates a beat to mount
-  await new Promise(r => setTimeout(r, 1200));
+for (const vp of VIEWPORTS) {
+  console.log(`\n── ${vp.name} (${vp.width}px) ──`);
+  for (const path of PAGES) {
+    const page = await browser.newPage();
+    await page.setViewport({ width: vp.width, height: vp.height });
+    await page.goto(BASE + path, { waitUntil: 'networkidle0', timeout: 60000 });
+    // the pages render from JS; give the templates a beat to mount
+    await new Promise(r => setTimeout(r, 1200));
 
-  const { violations } = await new AxePuppeteer(page).withTags(TAGS).analyze();
-  if (violations.length) {
-    total += violations.length;
-    console.log(`\n✗ ${path}`);
-    for (const v of violations) {
-      console.log(`  [${v.impact}] ${v.id} — ${v.help} (${v.nodes.length})`);
-      for (const n of v.nodes.slice(0, 5)) console.log(`      ${n.target.join(' ')}`);
-      console.log(`      ${v.helpUrl}`);
+    const { violations } = await new AxePuppeteer(page).withTags(TAGS).analyze();
+    if (violations.length) {
+      total += violations.length;
+      console.log(`✗ ${path}`);
+      for (const v of violations) {
+        console.log(`    [${v.impact}] ${v.id} — ${v.help} (${v.nodes.length})`);
+        for (const n of v.nodes.slice(0, 5)) console.log(`        ${n.target.join(' ')}`);
+        console.log(`        ${v.helpUrl}`);
+      }
+    } else {
+      console.log(`✓ ${path}`);
     }
-  } else {
-    console.log(`✓ ${path}`);
+    await page.close();
   }
-  await page.close();
 }
 
 await browser.close();

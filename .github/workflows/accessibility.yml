@@ -1,6 +1,6 @@
 # Accessibility regression check.
-# Serves the site exactly as GitHub Pages does and runs axe-core
-# against every page template. Fails the build on any violation.
+# Serves the site the way GitHub Pages does and runs axe-core over
+# every page template. Fails the build on any WCAG 2.1 AA violation.
 name: Accessibility
 
 on:
@@ -22,22 +22,20 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Install axe + a static server
-        run: npm init -y && npm install --no-audit --no-fund @axe-core/cli http-server
+      - name: Install axe + puppeteer
+        run: |
+          npm init -y >/dev/null
+          npm pkg set type=module >/dev/null
+          npm install --no-audit --no-fund \
+            puppeteer@23 @axe-core/puppeteer@4 http-server@14
 
       - name: Serve the site
         run: |
           npx http-server . -p 8080 --silent &
-          npx wait-on http://127.0.0.1:8080/index.html --timeout 60000 || sleep 5
+          for i in $(seq 1 30); do
+            curl -sf http://127.0.0.1:8080/index.html >/dev/null && break
+            sleep 1
+          done
 
       - name: Run axe-core
-        run: |
-          npx axe \
-            http://127.0.0.1:8080/index.html \
-            http://127.0.0.1:8080/brands.html \
-            "http://127.0.0.1:8080/brand.html?id=dahua" \
-            "http://127.0.0.1:8080/category.html?brand=dahua&id=Interactive-Whiteboards" \
-            "http://127.0.0.1:8080/product.html?id=lph86-mc480-u" \
-            "http://127.0.0.1:8080/work.html?id=sacred-heart-chiangmai" \
-            --tags wcag2a,wcag2aa,wcag21a,wcag21aa \
-            --exit
+        run: node .github/scripts/a11y.mjs

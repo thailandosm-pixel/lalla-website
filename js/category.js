@@ -26,6 +26,7 @@ if (!brand || !group) {
 } else {
 
   document.title = `${group.nameTh || group.name} — ${brand.name} | Lalla ลัลลา`;
+  setPageMeta({ title: document.title, description: `${group.nameTh || group.name} จาก ${brand.name} — จำหน่ายและติดตั้งโดย Lalla (ประเทศไทย)` });
 
   const models = MODELS.filter(m => m.brand === brandId && m.group === catId);
 

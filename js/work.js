@@ -23,6 +23,7 @@ if (!work) {
 } else {
 
   document.title = `${work.title} — ผลงานติดตั้ง | Lalla ลัลลา`;
+  setPageMeta({ title: document.title, description: work.blurb, image: work.cover });
 
   const others = WORKS.filter(w => w.id !== work.id).slice(0, 3);
 

@@ -123,7 +123,7 @@ function renderFooter() {
 
         <div class="footer-cols">
           <div class="footer-col">
-            <h4>Our Products</h4>
+            <h2>Our Products</h2>
             <ul>
               <li><a href="brand.html?id=dahua">Dahua</a></li>
               <li><a href="brand.html?id=samsung">Samsung Smart Signage</a></li>
@@ -133,14 +133,14 @@ function renderFooter() {
             </ul>
           </div>
           <div class="footer-col">
-            <h4>ข้อมูลทางเทคนิค</h4>
+            <h2>ข้อมูลทางเทคนิค</h2>
             <ul>
               <li><a href="product.html?id=dhi-phria2-5-pl#specs">Tech Specs</a></li>
               <li><a href="pdf/DHI-PHRIA2.5-PL _ Dahua LED Poster Screen.pdf" target="_blank" rel="noopener">ดาวน์โหลดโบรชัวร์</a></li>
             </ul>
           </div>
           <div class="footer-col">
-            <h4>Our Partnership</h4>
+            <h2>Our Partnership</h2>
             <ul>
               <li><a href="index.html#partnership">พันธมิตรทางธุรกิจ</a></li>
               <li><a href="index.html#support">การติดตั้งและรับประกัน</a></li>
@@ -148,7 +148,7 @@ function renderFooter() {
             </ul>
           </div>
           <div class="footer-col">
-            <h4>Contact Us</h4>
+            <h2>Contact Us</h2>
             <ul>
               ${SITE.contacts.map(c => `<li>${c.name}<br /><a href="${c.href}">โทร. ${c.phone}</a></li>`).join('')}
               <li><a href="mailto:${SITE.email}">${SITE.email}</a></li>
@@ -156,7 +156,7 @@ function renderFooter() {
           </div>
 
           <div class="footer-col footer-col-wide">
-            <h4>Office</h4>
+            <h2>Office</h2>
             <ul>
               <li>${SITE.company}</li>
               <li>${SITE.address}</li>
@@ -235,6 +235,35 @@ function initScrollSpy(linkSelector) {
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
 
   map.forEach((_, section) => io.observe(section));
+}
+
+/* ── Per-page canonical + social preview ───────────────────────
+   The static tags in <head> cover the bare page; pages that render
+   from a ?id= parameter call this so each item gets its own
+   canonical URL and its own share preview. ------------------- */
+function setPageMeta({ title, description, image } = {}) {
+  const head = document.head;
+  const url = location.origin + location.pathname + location.search;
+  const set = (sel, attr, val) => {
+    const el = head.querySelector(sel);
+    if (el && val) el.setAttribute(attr, val);
+  };
+  set('link[rel="canonical"]', 'href', url);
+  set('meta[property="og:url"]', 'content', url);
+  if (title) {
+    set('meta[property="og:title"]', 'content', title);
+    set('meta[name="twitter:title"]', 'content', title);
+  }
+  if (description) {
+    set('meta[name="description"]', 'content', description);
+    set('meta[property="og:description"]', 'content', description);
+    set('meta[name="twitter:description"]', 'content', description);
+  }
+  if (image) {
+    const abs = new URL(image, location.origin).href;
+    set('meta[property="og:image"]', 'content', abs);
+    set('meta[name="twitter:image"]', 'content', abs);
+  }
 }
 
 /* ── Utilities ── */

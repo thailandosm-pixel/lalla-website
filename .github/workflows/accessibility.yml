@@ -1,0 +1,43 @@
+# Accessibility regression check.
+# Serves the site exactly as GitHub Pages does and runs axe-core
+# against every page template. Fails the build on any violation.
+name: Accessibility
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  axe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+
+      - name: Install axe + a static server
+        run: npm init -y && npm install --no-audit --no-fund @axe-core/cli http-server
+
+      - name: Serve the site
+        run: |
+          npx http-server . -p 8080 --silent &
+          npx wait-on http://127.0.0.1:8080/index.html --timeout 60000 || sleep 5
+
+      - name: Run axe-core
+        run: |
+          npx axe \
+            http://127.0.0.1:8080/index.html \
+            http://127.0.0.1:8080/brands.html \
+            "http://127.0.0.1:8080/brand.html?id=dahua" \
+            "http://127.0.0.1:8080/category.html?brand=dahua&id=Interactive-Whiteboards" \
+            "http://127.0.0.1:8080/product.html?id=lph86-mc480-u" \
+            "http://127.0.0.1:8080/work.html?id=sacred-heart-chiangmai" \
+            --tags wcag2a,wcag2aa,wcag21a,wcag21aa \
+            --exit

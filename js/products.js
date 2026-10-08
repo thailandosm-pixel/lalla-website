@@ -22,7 +22,7 @@ const products = [
     brandLogo: "assets/cutout/dahua-logo.png",
     coverImage: "assets/cutout/poster-views.png",
     images: ["assets/cutout/poster-views.png"],
-    showcaseImage: "assets/S__102096899.jpg",
+    showcaseImage: "assets/S__102096899.webp",
     showcaseTitle: "ต่อกันได้ ไร้รอยต่อ",
     showcaseText: "โครงสร้างพับได้ นำหลายเครื่องมาเรียงต่อกันเป็นจอผืนใหญ่แบบ Seamless Splicing",
     datasheet: "pdf/DHI-PHRIA2.5-PL _ Dahua LED Poster Screen.pdf",

@@ -31,15 +31,15 @@
 :root {
   /* Brand */
   --green:        #4db840;
-  --green-dark:   #3a9430;
-  --green-deep:   #2b7a22;
+  --green-dark:   #2b7a22;   /* text-safe green: 4.93:1 on --bg-alt (WCAG AA) */
+  --green-deep:   #1e5c17;   /* deepest green: gradient end, white text 8:1 */
   --green-tint:   #f2faf1;
   --green-glow:   rgba(77, 184, 64, 0.28);
 
   /* Neutrals */
   --text:         #1d1d1f;
   --text-2:       #6e6e73;
-  --text-3:       #86868b;
+  --text-3:       #6b6b70;   /* muted text: 4.87:1 on --bg-alt (WCAG AA) */
   --bg:           #ffffff;
   --bg-alt:       #f5f5f7;
   --bg-deep:      #0b0f0c;
@@ -230,8 +230,13 @@ ul { list-style: none; }
   letter-spacing: -0.002em;
 }
 .ribbon strong { color: var(--text); font-weight: 600; }
-.ribbon a { color: var(--green-dark); }
-.ribbon a:hover { text-decoration: underline; }
+.ribbon a {
+  color: var(--green-dark);
+  /* underlined always: distinguishes the link from surrounding text without relying on colour (WCAG 1.4.1) */
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.ribbon a:hover { text-decoration-thickness: 2px; }
 
 /* ============================================================
    Buttons & links
@@ -251,8 +256,8 @@ ul { list-style: none; }
   white-space: nowrap;
 }
 
-.btn-primary { background: var(--green); color: #fff; }
-.btn-primary:hover { background: var(--green-dark); }
+.btn-primary { background: var(--green-dark); color: #fff; }
+.btn-primary:hover { background: var(--green-deep); }
 
 .btn-ghost {
   border: 1px solid var(--green-dark);
@@ -379,7 +384,7 @@ ul { list-style: none; }
 .tile.is-dark .t-eyebrow { color: var(--green); }
 
 .tile.is-green {
-  background: linear-gradient(165deg, var(--green) 0%, var(--green-deep) 100%);
+  background: linear-gradient(165deg, var(--green-dark) 0%, var(--green-deep) 100%);
   color: #fff;
 }
 .tile.is-green .tile-sub { color: rgba(255, 255, 255, 0.86); }
@@ -431,7 +436,7 @@ ul { list-style: none; }
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1;
-  background: linear-gradient(160deg, var(--green) 0%, var(--green-deep) 100%);
+  background: linear-gradient(160deg, var(--green-dark) 0%, var(--green-deep) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -603,7 +608,7 @@ ul { list-style: none; }
 }
 
 .hl-card:nth-child(3n+2) {
-  background: linear-gradient(168deg, var(--green) 0%, var(--green-deep) 100%);
+  background: linear-gradient(168deg, var(--green-dark) 0%, var(--green-deep) 100%);
 }
 .hl-card:nth-child(3n+3) { background: var(--bg-alt); color: var(--text); }
 .hl-card:nth-child(3n+3) .hl-card-body { color: var(--text-2); }
@@ -818,7 +823,7 @@ ul { list-style: none; }
 
 .contact-card {
   border-radius: var(--radius-lg);
-  background: linear-gradient(160deg, var(--green) 0%, var(--green-deep) 100%);
+  background: linear-gradient(160deg, var(--green-dark) 0%, var(--green-deep) 100%);
   color: #fff;
   padding: 62px 40px;
   text-align: center;
@@ -857,7 +862,7 @@ ul { list-style: none; }
   border-bottom: 1px solid var(--hairline);
 }
 
-.footer-col h4 { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+.footer-col h2, .footer-col h4 { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
 .footer-col li { margin-bottom: 8px; }
 .footer-col a { color: var(--text-2); transition: color 0.2s var(--ease); }
 .footer-col a:hover { color: var(--text); text-decoration: underline; }
@@ -1121,7 +1126,7 @@ section[id], .tile[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
 .cat-icon svg { width: 27px; height: 27px; }
 
 .cat-card:hover .cat-icon {
-  background: linear-gradient(160deg, var(--green) 0%, var(--green-deep) 100%);
+  background: linear-gradient(160deg, var(--green-dark) 0%, var(--green-deep) 100%);
   color: #fff;
 }
 
@@ -1163,7 +1168,7 @@ section[id], .tile[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
   width: 76px; height: 76px;
   margin-bottom: 24px;
   border-radius: 50%;
-  background: linear-gradient(160deg, var(--green) 0%, var(--green-deep) 100%);
+  background: linear-gradient(160deg, var(--green-dark) 0%, var(--green-deep) 100%);
   color: #fff;
   box-shadow: 0 14px 30px rgba(77, 184, 64, 0.32);
 }
@@ -1544,7 +1549,7 @@ section[id], .tile[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: var(--green);
+  color: var(--green-dark);
   margin-bottom: 12px;
 }
 

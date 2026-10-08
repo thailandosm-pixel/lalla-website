@@ -40,6 +40,7 @@ function renderModel(m) {
   const brand = BRANDS.find(b => b.id === m.brand);
   const group = brand && brand.groups.find(g => g.slug === m.group);
   document.title = `${m.model} — ${brand ? brand.name : ''} | Lalla ลัลลา`;
+  setPageMeta({ title: document.title, description: m.desc || `${m.model} จำหน่ายและติดตั้งโดย Lalla (ประเทศไทย)`, image: m.img });
 
   subnav.outerHTML = `
     <div class="subnav">
@@ -212,6 +213,7 @@ function mountSpecs(m) {
    ============================================================ */
 function renderRich(product) {
   document.title = `${product.name} — ${product.subtitle} | Lalla ลัลลา`;
+  setPageMeta({ title: document.title, description: product.heroLead || product.subtitle, image: product.coverImage });
 
   const sections = [
     { id: 'overview',   label: 'ภาพรวม' },

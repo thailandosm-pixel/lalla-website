@@ -1,0 +1,14 @@
+# Automated dependency vulnerability scanning.
+# This is a static site with no runtime package manifest, so the only
+# moving parts are the GitHub Actions used by the workflows below.
+# Dependabot alerts (for anything a manifest is added for later) are
+# enabled on the repository itself under Settings -> Code security.
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "ci"

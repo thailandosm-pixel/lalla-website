@@ -1,0 +1,5 @@
+# https://lallathailand.com/
+User-agent: *
+Allow: /
+
+Sitemap: https://lallathailand.com/sitemap.xml

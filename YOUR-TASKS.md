@@ -1,6 +1,6 @@
 # สิ่งที่คุณต้องทำเอง — Tasks only you can do
 
-Last updated: 2026-10-09
+Last updated: 2026-10-15
 
 Claude cannot do these, for one of three reasons: they need **your Google /
 Squarespace / GitHub login**, they need a **payment**, or they need a
@@ -145,6 +145,31 @@ after this work. Expect the four header findings in task 6 to still be there.
 
 ---
 
+## 9. Three places the website and your Company Profile disagree 🟡 answer when you can
+
+**Why Claude can't:** only you know which document is current — the website or
+the profile deck.
+
+**Checked and correct, nothing to do:** Dell. Your Company Profile page 5 lists
+all 17 brands, and the website's 14 match it exactly (the other 3 are the
+Dahua/Samsung/MAXHUB dealerships, shown separately). Verified against
+`Lalla-Company-Profile.pdf`.
+
+**But three things don't match:**
+
+| Item | Company Profile | Website |
+| --- | --- | --- |
+| Auto Parking System | listed (page 2) | missing |
+| EV Charger | listed (page 2) | missing |
+| Lighting System | not listed | shown |
+| Epson, Optoma | listed as projector brands (page 8) | not in brand list |
+
+**What to tell Claude:** for each one, which is right — add it to the website,
+or drop it. If you do supply auto parking and EV chargers, those are missing
+sales categories on your own site.
+
+---
+
 ## Already done — nothing for you to do
 
 - ✅ Accessibility: 0 violations, checked automatically on every push, at both
@@ -158,3 +183,4 @@ after this work. Expect the four header findings in task 6 to still be there.
 - ✅ Dependabot alerts enabled
 - ✅ Phone home page: 16 screens of scrolling → 8
 - ✅ Domain live on HTTPS, www redirect, old github.io link redirects
+- ✅ Dell on the brands page verified against your Company Profile (it is correct)

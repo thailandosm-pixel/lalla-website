@@ -1890,7 +1890,7 @@ body.quote-open { overflow: hidden; }
 .quote-done-mark {
   width: 56px; height: 56px;
   border-radius: 50%;
-  background: var(--green);
+  background: var(--green-dark);
   color: #fff;
   font-size: 27px;
   display: flex; align-items: center; justify-content: center;
@@ -2003,4 +2003,21 @@ body.quote-open { overflow: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
   .swipe-row { scroll-behavior: auto; }
+}
+
+/* Honeypot: off-screen, never shown, never focusable by a person.
+   display:none is avoided because some bots skip hidden inputs. */
+.quote-botcheck {
+  position: absolute !important;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Failed-send panel */
+.quote-done-mark.is-fail {
+  background: #fdecec;
+  color: #b3261e;
 }

@@ -83,8 +83,12 @@ function buildQuoteDrawer() {
               placeholder="รายละเอียดหน้างาน กำหนดการ งบประมาณ หรือคำถามอื่น ๆ"></textarea>
           </label>
 
+          <!-- honeypot: hidden from people, bots fill it in and get rejected -->
+          <input type="checkbox" name="botcheck" class="quote-botcheck"
+                 tabindex="-1" autocomplete="off" aria-hidden="true" />
+
           <div class="quote-actions">
-            <button type="submit" class="btn btn-primary">ส่งคำขอใบเสนอราคา</button>
+            <button type="submit" class="btn btn-primary" id="quoteSubmit">ส่งคำขอใบเสนอราคา</button>
             <button type="button" class="btn btn-ghost" data-quote-close>ยกเลิก</button>
           </div>
 
@@ -96,15 +100,28 @@ function buildQuoteDrawer() {
 
         <div class="quote-done" id="quoteDone" hidden>
           <div class="quote-done-mark">✓</div>
-          <h3 class="t-title">เปิดอีเมลให้แล้ว</h3>
+          <h3 class="t-title">ส่งคำขอเรียบร้อยแล้ว</h3>
           <p class="t-body th">
-            เราได้เตรียมอีเมลพร้อมข้อมูลที่คุณกรอกไว้แล้ว กด <strong>ส่ง</strong>
-            ในโปรแกรมอีเมลของคุณเพื่อส่งถึงเรา<br />
-            หากอีเมลไม่เปิดขึ้นมา โทรหาเราได้ที่
+            เราได้รับคำขอใบเสนอราคาของคุณแล้ว ทีมงานจะติดต่อกลับโดยเร็วที่สุด<br />
+            หากต้องการด่วน โทรหาเราได้ที่
             ${SITE.contacts.map(c => `<a href="${c.href}">${c.phone}</a>`).join(' · ')}
           </p>
           <div class="quote-actions">
             <button type="button" class="btn btn-primary" data-quote-close>ปิด</button>
+          </div>
+        </div>
+
+        <div class="quote-done is-fail" id="quoteFail" hidden>
+          <div class="quote-done-mark is-fail">!</div>
+          <h3 class="t-title">ส่งคำขอไม่สำเร็จ</h3>
+          <p class="t-body th">
+            ขออภัย ระบบส่งคำขอไม่สำเร็จ กรุณาลองอีกครั้ง
+            หรือโทรหาเราโดยตรงเพื่อขอใบเสนอราคา<br />
+            ${SITE.contacts.map(c => `<a href="${c.href}">${c.phone}</a>`).join(' · ')}
+          </p>
+          <div class="quote-actions">
+            <button type="button" class="btn btn-primary" id="quoteRetry">ลองอีกครั้ง</button>
+            <button type="button" class="btn btn-ghost" data-quote-close>ปิด</button>
           </div>
         </div>
       </div>
@@ -152,7 +169,14 @@ function closeQuote() {
   document.body.classList.remove('quote-open');
 }
 
-function submitQuote(e) {
+/* Web3Forms endpoint. The access key is a public identifier for the
+   destination inbox - it cannot read anything, and it is meant to ship
+   in page source. The recipient address is set in the Web3Forms
+   dashboard, not here, so a visitor cannot redirect the mail. */
+const QUOTE_ENDPOINT = 'https://api.web3forms.com/submit';
+const QUOTE_ACCESS_KEY = 'd12e1816-79cf-4976-9aa7-a8238e63728c';
+
+async function submitQuote(e) {
   e.preventDefault();
   const form = e.target;
   let firstBad = null;
@@ -166,15 +190,15 @@ function submitQuote(e) {
 
   const d = new FormData(form);
   const related = d.getAll('related');
+  const product = d.get('product');
+
   const lines = [
-    'ขอใบเสนอราคา — Lalla (Thailand)',
-    '',
     `ชื่อ–นามสกุล : ${d.get('name')}`,
     `เบอร์โทรศัพท์ : ${d.get('phone')}`,
     `อีเมล : ${d.get('email')}`,
     `บริษัท / โรงเรียน : ${d.get('org')}`,
     `จำนวน : ${d.get('amount')}`,
-    d.get('product') ? `สินค้าที่สนใจ : ${d.get('product')}` : '',
+    product ? `สินค้าที่สนใจ : ${product}` : '',
     related.length ? `สินค้าอื่นที่สนใจ : ${related.join(', ')}` : '',
     d.get('otherProduct') ? `ระบุเพิ่มเติม : ${d.get('otherProduct')}` : '',
     d.get('notes') ? `\nอื่น ๆ :\n${d.get('notes')}` : '',
@@ -182,14 +206,58 @@ function submitQuote(e) {
     `— ส่งจากหน้า ${location.href}`
   ].filter(Boolean);
 
-  const subject = `ขอใบเสนอราคา${d.get('product') ? ' — ' + d.get('product') : ''}`;
-  window.location.href =
-    `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}` +
-    `&body=${encodeURIComponent(lines.join('\n'))}`;
+  const payload = {
+    access_key: QUOTE_ACCESS_KEY,
+    subject: `ขอใบเสนอราคา${product ? ' — ' + product : ''}`,
+    from_name: 'เว็บไซต์ lallathailand.com',
+    /* so hitting Reply in Gmail answers the customer, not the website */
+    replyto: d.get('email'),
+    botcheck: d.get('botcheck') ? true : false,
 
+    'ชื่อ–นามสกุล': d.get('name'),
+    'เบอร์โทรศัพท์': d.get('phone'),
+    'อีเมล': d.get('email'),
+    'บริษัท / โรงเรียน': d.get('org'),
+    'จำนวน': d.get('amount'),
+    'สินค้าที่สนใจ': product || '—',
+    'สินค้าอื่นที่สนใจ': related.length ? related.join(', ') : '—',
+    'ระบุเพิ่มเติม': d.get('otherProduct') || '—',
+    'อื่น ๆ': d.get('notes') || '—',
+    'ส่งจากหน้า': location.href,
+    message: lines.join('\n')
+  };
+
+  const btn = document.getElementById('quoteSubmit');
+  const label = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = 'กำลังส่ง…'; }
+
+  let ok = false;
+  try {
+    const res = await fetch(QUOTE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json().catch(() => ({}));
+    ok = res.ok && data.success === true;
+  } catch (err) {
+    ok = false;   /* offline, blocked, or the endpoint is down */
+  }
+
+  if (btn) { btn.disabled = false; btn.textContent = label; }
+
+  /* Only claim it was sent once the server says so. */
   form.hidden = true;
-  document.getElementById('quoteDone').hidden = false;
+  document.getElementById(ok ? 'quoteDone' : 'quoteFail').hidden = false;
+  if (ok) form.reset();
 }
+
+/* "ลองอีกครั้ง" puts the filled-in form back, nothing retyped */
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#quoteRetry')) return;
+  document.getElementById('quoteFail').hidden = true;
+  document.getElementById('quoteForm').hidden = false;
+});
 
 /* Clear the error state as soon as a field is corrected */
 document.addEventListener('input', (e) => {

@@ -211,7 +211,7 @@ const BRANDS = [
         "icon": "cert",
         "blurb": "รุ่นที่ตรงตามเกณฑ์ราคากลางและคุณลักษณะพื้นฐานครุภัณฑ์คอมพิวเตอร์ (DE64)",
         "url": "https://www.dahuasecurity.com/th/Products/All-Products/DE-2564",
-        "count": 33
+        "count": 26
       }
     ]
   },

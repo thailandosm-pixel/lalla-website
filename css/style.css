@@ -938,8 +938,24 @@ ul { list-style: none; }
   .nav.is-open .nav-burger span:last-child  { transform: translateY(-3.25px) rotate(-45deg); }
 
   .subnav-inner { gap: 12px; }
-  .subnav-name { font-size: 17px; }
-  .subnav-links { gap: 16px; }
+  .subnav-name {
+    font-size: 17px;
+    /* a long model name used to push the quote button off the screen */
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .subnav-links { gap: 16px; min-width: 0; }
+  /* Pin the quote button to the right edge of the scrolling strip so it is
+     always on screen and tappable; the section links scroll underneath it.
+     Without this the button sat up to 121px off-screen on a 375px phone. */
+  .subnav-links a.btn {
+    position: sticky;
+    right: 0;
+    flex: 0 0 auto;
+    margin-left: 4px;
+    box-shadow: -10px 0 10px -6px rgba(255, 255, 255, 0.95);
+  }
 
   .panel { padding: 28px 22px 24px; }
   .contact-card { padding: 46px 24px; }

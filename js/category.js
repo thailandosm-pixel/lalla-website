@@ -28,7 +28,13 @@ if (!brand || !group) {
   document.title = `${group.nameTh || group.name} — ${brand.name} | Lalla ลัลลา`;
   setPageMeta({ title: document.title, description: `${group.nameTh || group.name} จาก ${brand.name} — จำหน่ายและติดตั้งโดย Lalla (ประเทศไทย)` });
 
-  const models = MODELS.filter(m => m.brand === brandId && m.group === catId);
+  /* De-duplicate by id: the scraped data lists a few models twice in the
+     same group (DE64 Compliance had 33 rows for 26 products), which showed
+     the same camera as two separate cards. */
+  const seenIds = new Set();
+  const models = MODELS.filter(m =>
+    m.brand === brandId && m.group === catId &&
+    !seenIds.has(m.id) && seenIds.add(m.id));
 
   /* Bucket by series so long lists stay readable */
   const buckets = new Map();

@@ -142,7 +142,7 @@ function renderFooter() {
           <div class="footer-col">
             <h2>Our Partnership</h2>
             <ul>
-              <li><a href="index.html#partnership">พันธมิตรทางธุรกิจ</a></li>
+              <li><a href="index.html#brands">พันธมิตรทางธุรกิจ</a></li>
               <li><a href="index.html#support">การติดตั้งและรับประกัน</a></li>
               <li><a href="index.html#support">อะไหล่และการซ่อมบำรุง</a></li>
             </ul>

@@ -35,26 +35,20 @@ live, so you only need to point Search Console at them.
 
 ---
 
-## 2. Web3Forms key — make the quote form actually send 🔴 important
+## 2. Web3Forms — set the recipient to lallath2002@gmail.com 🔴 one setting left
 
-**Why Claude can't:** the key is emailed to you.
+**Done:** the form now really sends, and the false "success" screen is fixed.
+Verified against the live API (HTTP 200, `success: true`).
 
-**Why it matters:** this is the one that is costing you money today. The
-ขอใบเสนอราคา form opens the visitor's email app instead of submitting. If they
-have no mail app set up, **the request disappears and the page still shows a
-green "sent" checkmark** — so the customer thinks they contacted you, and you
-never learn they existed.
+**Still to do — 1 minute.** You signed up with `thailand.osm@gmail.com`, so
+submissions go to *that* inbox by default. The recipient is set in the
+Web3Forms dashboard, not in the website code (that is deliberate — it stops
+anyone redirecting your leads).
 
-**Steps**
-1. Go to https://web3forms.com
-2. Type `lallath2002@gmail.com`, press the button
-3. Check your Gmail — it sends you an **Access Key**
-4. Give that key to Claude. It will wire the form up and fix the false
-   success screen.
-
-Free for 250 submissions/month. No account, no card.
-
----
+1. Log in at https://web3forms.com with `thailand.osm@gmail.com`
+2. Open the form **Lalla — ขอใบเสนอราคา** → **Settings**
+3. Change the recipient / notification email to `lallath2002@gmail.com`
+4. Save, then send yourself one test from the website to confirm
 
 ## 3. LINE Official Account 🟡 worth doing
 
@@ -184,3 +178,5 @@ sales categories on your own site.
 - ✅ Phone home page: 16 screens of scrolling → 8
 - ✅ Domain live on HTTPS, www redirect, old github.io link redirects
 - ✅ Dell on the brands page verified against your Company Profile (it is correct)
+- ✅ Quote form sends for real; no more false success screen
+- ✅ Google Search Console TXT record added and live in DNS

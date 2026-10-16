@@ -2037,3 +2037,48 @@ body.quote-open { overflow: hidden; }
   background: #fdecec;
   color: #b3261e;
 }
+
+/* ============================================================
+   Phone: tap targets
+   ------------------------------------------------------------
+   An audit found 20 links and buttons under 32px on a phone - the
+   burger was 33x24 and the ribbon's phone link only 17px tall.
+   Apple and WCAG both put the comfortable minimum near 44px.
+   These rules grow the *hit area* without moving the layout:
+   padding expands the box, and a negative margin of the same size
+   pulls the neighbours back where they were.
+   ============================================================ */
+@media (max-width: 734px) {
+  /* burger: 33x24 -> 44x44 hit area, icon stays put */
+  .nav-burger {
+    padding: 14px 12px;
+    margin: -14px -12px -14px auto;
+  }
+
+  /* ribbon phone number: 17px tall -> 44px */
+  .ribbon a {
+    display: inline-block;
+    padding-block: 13px;
+    margin-block: -13px;
+  }
+
+  /* hero / section call-to-action links: 30px -> 44px */
+  .link,
+  .cta-row .link-lg {
+    padding-block: 7px;
+    margin-block: -7px;
+  }
+
+  /* footer link lists: 15-22px rows -> 44px, and spaced apart so
+     neighbouring links are not hit by mistake */
+  .footer-col li { margin-bottom: 2px; }
+  .footer-col a,
+  .footer-legal a {
+    display: inline-block;
+    padding-block: 11px;
+    margin-block: -5px;
+  }
+
+  /* contact block inside the green card */
+  .contact-detail a { display: inline-block; padding-block: 8px; margin-block: -4px; }
+}

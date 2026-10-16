@@ -11,6 +11,7 @@ const subnav  = document.getElementById('subnav-slot');
 
 if (!brand) {
   subnav.remove();
+  setNoIndex();
   root.innerHTML = `
     <section class="section center"><div class="wrap">
       <p class="t-eyebrow">404</p>

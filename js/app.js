@@ -237,6 +237,18 @@ function initScrollSpy(linkSelector) {
   map.forEach((_, section) => io.observe(section));
 }
 
+/* A product/brand/category/work id that does not exist still returns
+   HTTP 200 from GitHub Pages, so tell crawlers not to index that state. */
+function setNoIndex() {
+  if (document.querySelector('meta[name="robots"]')) return;
+  const m = document.createElement('meta');
+  m.name = 'robots';
+  m.content = 'noindex, follow';
+  document.head.appendChild(m);
+  const c = document.querySelector('link[rel="canonical"]');
+  if (c) c.remove();
+}
+
 /* ── Per-page canonical + social preview ───────────────────────
    The static tags in <head> cover the bare page; pages that render
    from a ?id= parameter call this so each item gets its own
@@ -307,5 +319,3 @@ function initSwipeRows(root = document) {
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-const liveProducts = () => products.filter(p => !p.placeholder);
-const productSlots = () => products.filter(p => p.placeholder);

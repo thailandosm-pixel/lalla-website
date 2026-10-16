@@ -16,6 +16,7 @@ const model = (typeof MODELS !== 'undefined') ? MODELS.find(m => m.id === pid) :
 
 if (!rich && !model) {
   subnav.remove();
+  setNoIndex();
   root.innerHTML = `
     <section class="section center"><div class="wrap">
       <p class="t-eyebrow">404</p>
@@ -215,12 +216,15 @@ function renderRich(product) {
   document.title = `${product.name} — ${product.subtitle} | Lalla ลัลลา`;
   setPageMeta({ title: document.title, description: product.heroLead || product.subtitle, image: product.coverImage });
 
+  /* Only list a section the page will actually render. #highlights and
+     #gallery are conditional below, so a product without them used to get
+     a sub-nav link pointing at an id that does not exist. */
   const sections = [
     { id: 'overview',   label: 'ภาพรวม' },
-    { id: 'highlights', label: 'จุดเด่น' },
-    { id: 'gallery',    label: 'แกลเลอรี' },
-    { id: 'specs',      label: 'Tech Specs' }
-  ];
+    { id: 'highlights', label: 'จุดเด่น',    when: product.highlights && product.highlights.length },
+    { id: 'gallery',    label: 'แกลเลอรี',   when: !!product.showcaseImage },
+    { id: 'specs',      label: 'Tech Specs', when: product.specs && product.specs.length }
+  ].filter(s => s.when === undefined || s.when);
 
   subnav.outerHTML = `
     <div class="subnav">

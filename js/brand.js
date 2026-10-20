@@ -25,6 +25,7 @@ if (!brand) {
 
   document.title = `${brand.name} — ${brand.tagline} | Lalla ลัลลา`;
   setPageMeta({ title: document.title, description: brand.blurb });
+  lallaTrack('brand_view', { brand: brand.id });
 
   const total = brand.groups.reduce((n, g) => n + (g.count || 0), 0);
 

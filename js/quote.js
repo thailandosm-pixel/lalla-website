@@ -162,10 +162,19 @@ function openQuote(ctx = {}) {
     : '<p class="t-small th qf-sub">ไม่มีรายการแนะนำ — พิมพ์สินค้าที่ต้องการด้านล่างได้เลย</p>';
 
   document.body.classList.add('quote-open');
+  lallaTrack('quote_open', { product: ctx.product || '(none)', related_offered: list.length });
   setTimeout(() => root.querySelector('.quote-drawer').focus(), 60);
 }
 
 function closeQuote() {
+  /* Closing while the form is still showing means they started a quote
+     request and gave up - the single most useful number on the site. */
+  const form = document.getElementById('quoteForm');
+  if (document.body.classList.contains('quote-open') && form && !form.hidden) {
+    const filled = [...new FormData(form).entries()]
+      .filter(([k, v]) => k !== 'product' && String(v).trim()).length;
+    lallaTrack('quote_abandoned', { fields_filled: filled });
+  }
   document.body.classList.remove('quote-open');
 }
 
@@ -186,7 +195,11 @@ async function submitQuote(e) {
     inp.closest('.qf').classList.toggle('is-bad', bad);
     if (bad && !firstBad) firstBad = inp;
   });
-  if (firstBad) { firstBad.focus(); return; }
+  if (firstBad) {
+    lallaTrack('quote_validation_error', { field: firstBad.name });
+    firstBad.focus();
+    return;
+  }
 
   const d = new FormData(form);
   const related = d.getAll('related');
@@ -247,6 +260,12 @@ async function submitQuote(e) {
   if (btn) { btn.disabled = false; btn.textContent = label; }
 
   /* Only claim it was sent once the server says so. */
+  lallaTrack(ok ? 'quote_submit' : 'quote_submit_failed', {
+    product: product || '(none)',
+    amount: d.get('amount'),
+    related_count: related.length
+  });
+
   form.hidden = true;
   document.getElementById(ok ? 'quoteDone' : 'quoteFail').hidden = false;
   if (ok) form.reset();

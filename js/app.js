@@ -166,6 +166,7 @@ function renderFooter() {
 
         <div class="footer-legal">
           <span>Copyright © ${year} ${SITE.company} สงวนลิขสิทธิ์</span>
+          <a href="#" data-consent-open>การตั้งค่าคุกกี้</a>
           <span class="sep">ตัวแทนจำหน่ายอย่างเป็นทางการ</span>
         </div>
       </div>

@@ -2082,3 +2082,73 @@ body.quote-open { overflow: hidden; }
   /* contact block inside the green card */
   .contact-detail a { display: inline-block; padding-block: 8px; margin-block: -4px; }
 }
+
+/* ============================================================
+   Consent banner (see js/consent.js)
+   A bar at the bottom rather than a full-screen modal: it does
+   not block the page, and PDPA does not require it to. Refuse and
+   accept are the same size and sit together, because a refusal
+   that is harder to find is not a free choice.
+   ============================================================ */
+.consent {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 1200;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-top: 1px solid var(--hairline);
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.07);
+  animation: consent-rise 0.32s var(--ease) both;
+}
+
+@keyframes consent-rise {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+.consent-inner {
+  max-width: var(--page-wide);
+  margin: 0 auto;
+  padding: 16px var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.consent-copy { flex: 1 1 auto; min-width: 0; }
+.consent-title { font-size: 14px; font-weight: 600; color: var(--text); }
+.consent-text {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-2);
+  margin-top: 3px;
+  max-width: 76ch;
+}
+
+.consent-actions {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 10px;
+}
+.consent-actions .btn { font-size: 14px; padding: 10px 22px; }
+
+/* keep the bar clear of the page's own bottom edge content */
+body.has-consent-bar { scroll-padding-bottom: 120px; }
+
+@media (max-width: 734px) {
+  .consent-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 16px var(--gutter) calc(16px + env(safe-area-inset-bottom));
+  }
+  .consent-actions { gap: 10px; }
+  /* both buttons share the row evenly - neither is the easy one */
+  .consent-actions .btn { flex: 1 1 0; text-align: center; }
+  .consent-text { font-size: 12.5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .consent { animation: none; }
+}

@@ -42,6 +42,7 @@ function renderModel(m) {
   const group = brand && brand.groups.find(g => g.slug === m.group);
   document.title = `${m.model} — ${brand ? brand.name : ''} | Lalla ลัลลา`;
   setPageMeta({ title: document.title, description: m.desc || `${m.model} จำหน่ายและติดตั้งโดย Lalla (ประเทศไทย)`, image: m.img });
+  lallaTrack('product_view', { model: m.model, brand: m.brand, group: m.group, has_specs: !!m.nSpecs });
 
   subnav.outerHTML = `
     <div class="subnav">
@@ -215,6 +216,7 @@ function mountSpecs(m) {
 function renderRich(product) {
   document.title = `${product.name} — ${product.subtitle} | Lalla ลัลลา`;
   setPageMeta({ title: document.title, description: product.heroLead || product.subtitle, image: product.coverImage });
+  lallaTrack('product_view', { model: product.name, brand: 'dahua', group: product.category, featured: true });
 
   /* Only list a section the page will actually render. #highlights and
      #gallery are conditional below, so a product without them used to get

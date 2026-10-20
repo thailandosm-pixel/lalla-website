@@ -28,6 +28,7 @@ if (!brand || !group) {
 
   document.title = `${group.nameTh || group.name} — ${brand.name} | Lalla ลัลลา`;
   setPageMeta({ title: document.title, description: `${group.nameTh || group.name} จาก ${brand.name} — จำหน่ายและติดตั้งโดย Lalla (ประเทศไทย)` });
+  lallaTrack('category_view', { brand: brand.id, category: group.slug, models: models.length });
 
   /* De-duplicate by id: the scraped data lists a few models twice in the
      same group (DE64 Compliance had 33 rows for 26 products), which showed

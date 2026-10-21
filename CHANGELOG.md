@@ -7,6 +7,25 @@ Live site: https://lallathailand.com · Repo: thailandosm-pixel/lalla-website
 
 ---
 
+## 2026-10-21 — "คุณรู้จักเราจากที่ไหน?"
+
+Added an optional referral-source field at the end of the quote form:
+Google / LINE / เพื่อนแนะนำ / เคยใช้บริการ / Facebook / อื่น ๆ.
+
+Deliberately **not required** — a mandatory extra field costs more leads than
+the answer is worth. Skipped answers arrive as "(ไม่ได้ระบุ)".
+
+The answer flows three ways: into the quote email you receive, into the
+plain-text body, and into the `quote_submit` analytics event as `heard_from`,
+so it can be counted over time once a provider is connected.
+
+At your lead volume this beats any analytics tool for one specific question —
+*which channel actually produces customers* — because it is self-reported by
+real buyers rather than inferred from a referrer header, and it survives
+people who refuse cookies.
+
+---
+
 ## 2026-10-21 — Consent banner + analytics layer
 
 **Consent (PDPA).** The site previously set no cookies at all and had no

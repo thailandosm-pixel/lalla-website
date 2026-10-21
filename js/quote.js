@@ -83,6 +83,19 @@ function buildQuoteDrawer() {
               placeholder="รายละเอียดหน้างาน กำหนดการ งบประมาณ หรือคำถามอื่น ๆ"></textarea>
           </label>
 
+          <label class="qf qf-full">
+            <span class="qf-label">คุณรู้จักเราจากที่ไหน?</span>
+            <select name="heardFrom">
+              <option value="">— เลือก (ไม่บังคับ) —</option>
+              <option value="Google">Google / ค้นหาออนไลน์</option>
+              <option value="LINE">LINE</option>
+              <option value="เพื่อนแนะนำ">เพื่อนหรือคนรู้จักแนะนำ</option>
+              <option value="เคยใช้บริการ">เคยใช้บริการมาก่อน</option>
+              <option value="Facebook">Facebook</option>
+              <option value="อื่น ๆ">อื่น ๆ</option>
+            </select>
+          </label>
+
           <!-- honeypot: hidden from people, bots fill it in and get rejected -->
           <input type="checkbox" name="botcheck" class="quote-botcheck"
                  tabindex="-1" autocomplete="off" aria-hidden="true" />
@@ -215,6 +228,7 @@ async function submitQuote(e) {
     related.length ? `สินค้าอื่นที่สนใจ : ${related.join(', ')}` : '',
     d.get('otherProduct') ? `ระบุเพิ่มเติม : ${d.get('otherProduct')}` : '',
     d.get('notes') ? `\nอื่น ๆ :\n${d.get('notes')}` : '',
+    d.get('heardFrom') ? `รู้จักเราจาก : ${d.get('heardFrom')}` : '',
     '',
     `— ส่งจากหน้า ${location.href}`
   ].filter(Boolean);
@@ -236,6 +250,7 @@ async function submitQuote(e) {
     'สินค้าอื่นที่สนใจ': related.length ? related.join(', ') : '—',
     'ระบุเพิ่มเติม': d.get('otherProduct') || '—',
     'อื่น ๆ': d.get('notes') || '—',
+    'รู้จักเราจาก': d.get('heardFrom') || '(ไม่ได้ระบุ)',
     'ส่งจากหน้า': location.href,
     message: lines.join('\n')
   };
@@ -263,7 +278,8 @@ async function submitQuote(e) {
   lallaTrack(ok ? 'quote_submit' : 'quote_submit_failed', {
     product: product || '(none)',
     amount: d.get('amount'),
-    related_count: related.length
+    related_count: related.length,
+    heard_from: d.get('heardFrom') || '(not answered)'
   });
 
   form.hidden = true;

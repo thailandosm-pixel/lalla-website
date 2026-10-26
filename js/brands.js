@@ -349,7 +349,35 @@ const BRANDS = [
       }
     ]
   },
+  /* Sourced, not an authorised dealership — has a full catalogue here,
+     but is listed under "แบรนด์ที่จัดหาให้", never with the dealer brands. */
+  {
+    "id": "imin",
+    "name": "iMin",
+    "nameTh": "ไอมิน",
+    "wordmark": "iMin",
+    "logo": "",
+    "sourced": true,
+    "tagline": "Self-service Kiosk",
+    "blurb": "ตู้คีออสก์บริการตนเองระบบ Android สั่งซื้อ ชำระเงิน และพิมพ์ใบเสร็จได้ในเครื่องเดียว เหมาะกับร้านอาหาร ค้าปลีก และงานบริการ",
+    "site": "https://www.imin.com/products/#self-service-kiosk",
+    "accent": "#e60012",
+    "groups": [
+      {
+        "slug": "self-service-kiosk",
+        "name": "Self-service Kiosk",
+        "nameTh": "ตู้คีออสก์บริการตนเอง",
+        "icon": "kit",
+        "blurb": "ตู้คีออสก์สั่งซื้อและชำระเงินด้วยตนเอง พร้อมเครื่องพิมพ์ใบเสร็จ สแกนเนอร์ และรับชำระ NFC / QR",
+        "url": "https://www.imin.com/products/#self-service-kiosk",
+        "count": 2
+      }
+    ]
+  },
 ];
+
+/* The authorised dealer brands — everything in BRANDS except sourced ones. */
+const DEALER_BRANDS = BRANDS.filter(b => !b.sourced);
 
 /* ============================================================
    Other brands we supply and support.

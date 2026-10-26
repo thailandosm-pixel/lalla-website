@@ -1,5 +1,5 @@
 /* ============================================================
-   Unified model index — Dahua + Samsung + MAXHUB
+   Unified model index — Dahua + Samsung + MAXHUB + iMin
    Scraped from each brand's official site. Full specs live in
    js/specs/<specKey>.js and load on demand.
    ============================================================ */
@@ -672,4 +672,6 @@ const MODELS = [
   {"id":"maxhub-smart-lectern","brand":"maxhub","model":"Smart Lectern","desc":"MAXHUB focuses on developing collaboration solutions that enable immersive communications. We have enhanced team creativity and productivity worldwide by providing advanced audio-visual technologies a","img":"","url":"https://www.maxhub.com/us/smart-lectern/","group":"accessories","series":"","seriesTitle":"Accessories","nSpecs":0,"datasheet":"","specKey":"maxhub"},
   {"id":"maxhub-wireless-dongle-wt15s","brand":"maxhub","model":"Wireless Dongle WT15S","desc":"MAXHUB focuses on developing collaboration solutions that enable immersive communications. We have enhanced team creativity and productivity worldwide by providing advanced audio-visual technologies a","img":"assets/products-maxhub/wireless-dongle-wt15s.webp","url":"https://www.maxhub.com/us/wireless-dongle-wt15s/","group":"accessories","series":"","seriesTitle":"Accessories","nSpecs":25,"datasheet":"","specKey":"maxhub"},
   {"id":"maxhub-maxhub","brand":"maxhub","model":"MAXHUB","desc":"MAXHUB focuses on developing collaboration solutions that enable immersive communications. We have enhanced team creativity and productivity worldwide by providing advanced audio-visual technologies a","img":"","url":"https://www.maxhub.com/us/pivot/","group":"software","series":"","seriesTitle":"Software","nSpecs":0,"datasheet":"","specKey":"maxhub"},
+  {"id":"imin-heron-1","brand":"imin","model":"Heron 1","desc":"ตู้คีออสก์บริการตนเอง 23.8\" Android 15 พร้อมเครื่องพิมพ์ใบเสร็จ สแกนเนอร์ และรับชำระ NFC / QR","img":"assets/products-imin/heron-1.webp","url":"https://www.imin.com/product/heron-1/","group":"self-service-kiosk","series":"","seriesTitle":"Self-service Kiosk","nSpecs":39,"datasheet":"","specKey":"imin"},
+  {"id":"imin-heron-1-mini","brand":"imin","model":"Heron 1 mini","desc":"ตู้คีออสก์บริการตนเอง 15.6\" Android 15 ขนาดกะทัดรัด พร้อมเครื่องพิมพ์ใบเสร็จ สแกนเนอร์ และรับชำระ NFC / QR","img":"assets/products-imin/heron-1-mini.webp","url":"https://www.imin.com/product/heron-1-mini/","group":"self-service-kiosk","series":"","seriesTitle":"Self-service Kiosk","nSpecs":40,"datasheet":"","specKey":"imin"},
 ];

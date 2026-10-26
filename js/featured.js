@@ -57,5 +57,19 @@ const FEATURED = [
     "model": "KM24C-5",
     "desc": "ตู้คีออสก์บัตรคิว 24\" Samsung Kiosk KMC Windows OS",
     "img": "assets/products-samsung/km24c-5.webp"
+  },
+  {
+    "id": "imin-heron-1",
+    "brand": "imin",
+    "model": "Heron 1",
+    "desc": "ตู้คีออสก์บริการตนเอง 23.8\" Android 15 พร้อมพิมพ์ใบเสร็จและรับชำระ NFC / QR",
+    "img": "assets/products-imin/heron-1.webp"
+  },
+  {
+    "id": "imin-heron-1-mini",
+    "brand": "imin",
+    "model": "Heron 1 mini",
+    "desc": "ตู้คีออสก์บริการตนเอง 15.6\" ขนาดกะทัดรัด Android 15",
+    "img": "assets/products-imin/heron-1-mini.webp"
   }
 ];

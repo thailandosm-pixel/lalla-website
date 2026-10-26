@@ -81,7 +81,7 @@ if (!brand) {
           <a class="link" href="index.html#brands">ดูทั้งหมด</a>
         </div>
         <div class="brand-grid">
-          ${BRANDS.filter(b => b.id !== brand.id).map(b => `
+          ${DEALER_BRANDS.filter(b => b.id !== brand.id).map(b => `
             <a class="brand-card reveal" href="brand.html?id=${encodeURIComponent(b.id)}">
               <span class="brand-mark">${brandMark(b)}</span>
               <span class="brand-tag">${esc(b.tagline)}</span>

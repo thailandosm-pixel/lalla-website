@@ -7,6 +7,26 @@ Live site: https://lallathailand.com · Repo: thailandosm-pixel/lalla-website
 
 ---
 
+## 2026-10-26 — iMin self-service kiosks + category page fix
+
+**iMin Heron 1 (23.8") and Heron 1 mini (15.6")** added, with photos and full
+spec tables (39 and 40 rows), from imin.com. iMin is the kiosk brand carried
+by SiS Distribution (Thailand).
+
+iMin is **sourced, not an authorised dealership**, so it is flagged
+`sourced: true` in `js/brands.js`. It has its own brand, category and product
+pages, but it is kept off the dealer brand cards (home page, brands page,
+"other brands") and shows first in the "แบรนด์ที่จัดหาให้" grid, linked to
+its catalogue. Both kiosks appear in the featured products, right after
+the Samsung KM24C-5 kiosk. Sitemap updated.
+
+**Fix:** every category page (`category.html`) was stuck on "กำลังโหลด…".
+`category.js` logged the analytics event using `models` one line before
+it was defined, which threw an error and stopped the page. The event now
+fires after the list is built.
+
+---
+
 ## 2026-10-21 — "คุณรู้จักเราจากที่ไหน?"
 
 Added an optional referral-source field at the end of the quote form:

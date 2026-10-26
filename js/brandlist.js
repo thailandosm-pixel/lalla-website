@@ -17,7 +17,11 @@ document.getElementById('subnav-slot').outerHTML = `
     </div>
   </div>`;
 
-const totalModels = BRANDS.reduce(
+/* Sourced brands that still have a catalogue here (e.g. iMin) lead the
+   supply grid and link through to their brand page. */
+const SOURCED = BRANDS.filter(b => b.sourced);
+
+const totalModels = DEALER_BRANDS.reduce(
   (n, b) => n + b.groups.reduce((m, g) => m + (g.count || 0), 0), 0);
 
 root.innerHTML = `
@@ -43,10 +47,10 @@ root.innerHTML = `
           <h2 class="t-title">ตัวแทนจำหน่ายอย่างเป็นทางการ</h2>
           <p class="t-small th">มีแคตตาล็อกสินค้าและข้อมูลจำเพาะครบบนเว็บไซต์นี้</p>
         </div>
-        <span class="t-small">${BRANDS.length} แบรนด์ · ${totalModels} รุ่น</span>
+        <span class="t-small">${DEALER_BRANDS.length} แบรนด์ · ${totalModels} รุ่น</span>
       </div>
       <div class="brand-grid">
-        ${BRANDS.map(b => {
+        ${DEALER_BRANDS.map(b => {
           const total = b.groups.reduce((n, g) => n + (g.count || 0), 0);
           return `
             <a class="brand-card reveal" href="brand.html?id=${encodeURIComponent(b.id)}">
@@ -70,9 +74,18 @@ root.innerHTML = `
           <h2 class="t-title">แบรนด์ที่เราจัดหาให้</h2>
           <p class="t-small th">สั่งซื้อผ่านเราได้ แจ้งรุ่นที่ต้องการเพื่อขอใบเสนอราคา</p>
         </div>
-        <span class="t-small">${MORE_BRANDS.length} แบรนด์</span>
+        <span class="t-small">${MORE_BRANDS.length + SOURCED.length} แบรนด์</span>
       </div>
       <div class="supply-grid">
+        ${SOURCED.map(b => {
+          const total = b.groups.reduce((n, g) => n + (g.count || 0), 0);
+          return `
+          <a class="supply-card has-catalog reveal" href="brand.html?id=${encodeURIComponent(b.id)}">
+            <span class="supply-name">${esc(b.name)}</span>
+            <span class="supply-sub th">${esc(b.groups.map(g => g.nameTh || g.name).join(' · '))}</span>
+            <span class="supply-link">ดู ${total} รุ่น ›</span>
+          </a>`;
+        }).join('')}
         ${MORE_BRANDS.map(b => `
           <div class="supply-card reveal">
             <span class="supply-name">${esc(b.name)}</span>

@@ -7,7 +7,7 @@ mountChrome('home');
 /* ── Brand cards ── */
 const brandGrid = document.getElementById('brand-grid');
 if (brandGrid) {
-  brandGrid.innerHTML = BRANDS.map(b => {
+  brandGrid.innerHTML = DEALER_BRANDS.map(b => {
     const total = b.groups.reduce((n, g) => n + (g.count || 0), 0);
     return `
       <a class="brand-card reveal" href="brand.html?id=${encodeURIComponent(b.id)}">
@@ -30,7 +30,7 @@ if (brandGrid) {
         Hikvision, Hisense, Dell, Lenovo, Canon และอีกมากมาย
       </span>
       <span class="brand-meta">
-        <span>${typeof MORE_BRANDS !== 'undefined' ? MORE_BRANDS.length : 14} แบรนด์ · และมากกว่านั้น</span>
+        <span>${(typeof MORE_BRANDS !== 'undefined' ? MORE_BRANDS.length : 14) + BRANDS.filter(b => b.sourced).length} แบรนด์ · และมากกว่านั้น</span>
         <span class="brand-go" aria-hidden="true">›</span>
       </span>
     </a>`;

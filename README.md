@@ -27,9 +27,9 @@ Click a product → the detail page.
 ```
 css/style.css        Design system — tokens at the top
 js/brands.js         ← BRANDS + their product groups (counts, icons, Thai names)
-js/models.js         ← 667 products (Dahua 598, Samsung 48, MAXHUB 21)
+js/models.js         ← 669 products (Dahua 598, Samsung 48, MAXHUB 21, iMin 2)
 js/specs/<key>.js    Full spec tables for every brand, loaded on demand
-                     (dahua-<group>.js, samsung.js, maxhub.js)
+                     (dahua-<group>.js, samsung.js, maxhub.js, imin.js)
 js/featured.js       ← the products shown on the home page
 js/works.js          ← PROJECT REFERENCES (6 projects + photo sets)
 js/brandlist.js      Renders brands.html
@@ -47,6 +47,7 @@ v1-original/         The first draft, kept intact
 | Dahua | dahuasecurity.com/th/Products | 598 (22 categories) | 581 |
 | Samsung | samsung.com/th/business/smart-signage | 48 | 48 |
 | MAXHUB | maxhub.com/us | 21 | 9 + 12 with feature copy |
+| iMin (sourced via SiS) | imin.com/products | 2 | 2 |
 
 **638 of 667 products carry a full spec table on this site**; 650 carry
 substantive content. Nothing is fetched from the manufacturers at view time —

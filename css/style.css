@@ -1326,6 +1326,7 @@ section[id], .tile[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
 }
 .wordmark-samsung { color: #1428a0; letter-spacing: -0.045em; }
 .wordmark-maxhub  { color: #1d1d1f; letter-spacing: 0.01em; }
+.wordmark-imin    { color: #e60012; letter-spacing: -0.01em; }
 
 .brand-tag {
   font-size: 13px;
@@ -1712,6 +1713,14 @@ section[id], .tile[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
 }
 .supply-card.is-note:hover { border-color: var(--green); box-shadow: none; }
 .supply-card.is-note .supply-name { color: var(--green-dark); }
+
+/* A sourced brand with its own catalogue on this site */
+.supply-link {
+  margin-top: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--green-dark);
+}
 
 /* ============================================================
    Contact card buttons — one uniform treatment

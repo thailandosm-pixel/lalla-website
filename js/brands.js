@@ -22,7 +22,7 @@ const BRANDS = [
         "icon": "camera",
         "blurb": "กล้อง IP ความละเอียดสูง พร้อม AI วิเคราะห์ภาพ WizMind และ WizSense",
         "url": "https://www.dahuasecurity.com/th/Products/All-Products/Network-Cameras",
-        "count": 73
+        "count": 75
       },
       {
         "slug": "HDCVI-Cameras",
@@ -31,7 +31,7 @@ const BRANDS = [
         "icon": "camera-hd",
         "blurb": "กล้องอนาล็อกความละเอียดสูงผ่านสายโคแอกเชียล ติดตั้งง่าย ใช้สายเดิมได้",
         "url": "https://www.dahuasecurity.com/th/Products/All-Products/HDCVI-Cameras",
-        "count": 63
+        "count": 70
       },
       {
         "slug": "Thermal-Cameras",
@@ -49,7 +49,16 @@ const BRANDS = [
         "icon": "ptz",
         "blurb": "หมุน ส่าย ซูมได้รอบทิศ ติดตามวัตถุอัตโนมัติ ครอบคลุมพื้นที่กว้าง",
         "url": "https://www.dahuasecurity.com/th/Products/All-Products/PTZ-Cameras",
-        "count": 20
+        "count": 21
+      },
+      {
+        "slug": "Wireless-Products",
+        "name": "Wireless Products",
+        "nameTh": "กล้องไร้สาย Wi-Fi",
+        "icon": "camera",
+        "blurb": "กล้อง Wi-Fi ติดตั้งง่าย ไม่ต้องเดินสายแลน ทั้งแบบ Bullet และแบบหมุนได้ Pan & Tilt สำหรับบ้านและร้านค้า",
+        "url": "https://www.dahuasecurity.com/th/products/wireless-products",
+        "count": 4
       },
       {
         "slug": "Network-Recorders",
@@ -58,7 +67,7 @@ const BRANDS = [
         "icon": "nvr",
         "blurb": "เครื่องบันทึกภาพผ่านเครือข่าย รองรับ AI และหลายช่องสัญญาณ",
         "url": "https://www.dahuasecurity.com/th/Products/All-Products/Network-Recorders",
-        "count": 13
+        "count": 19
       },
       {
         "slug": "HDCVI-Recorders",
@@ -76,7 +85,7 @@ const BRANDS = [
         "icon": "intercom",
         "blurb": "ระบบอินเตอร์คอมภาพสำหรับบ้าน อาคารชุด และสำนักงาน",
         "url": "https://www.dahuasecurity.com/th/Products/All-Products/Video-Intercoms",
-        "count": 6
+        "count": 8
       },
       {
         "slug": "Access-Control",
@@ -85,7 +94,7 @@ const BRANDS = [
         "icon": "access",
         "blurb": "ควบคุมประตู สแกนใบหน้า บัตร ลายนิ้วมือ และระบบบันทึกเวลาทำงาน",
         "url": "https://www.dahuasecurity.com/th/Products/All-Products/Access-Control",
-        "count": 51
+        "count": 52
       },
       {
         "slug": "Alarms",
@@ -103,7 +112,7 @@ const BRANDS = [
         "icon": "display",
         "blurb": "จอมอนิเตอร์ วิดีโอวอลล์ ป้ายดิจิทัล และจอ LED รวมถึงระบบควบคุมศูนย์สั่งการ",
         "url": "https://www.dahuasecurity.com/th/Products/All-Products/Display--Control",
-        "count": 27
+        "count": 36
       },
       {
         "slug": "Interactive-Whiteboards",
@@ -112,7 +121,7 @@ const BRANDS = [
         "icon": "board",
         "blurb": "กระดานอัจฉริยะสำหรับห้องประชุมและห้องเรียน พร้อมซอฟต์แวร์และอุปกรณ์เสริม",
         "url": "https://www.dahuasecurity.com/th/Products/All-Products/Interactive-Whiteboards",
-        "count": 12
+        "count": 19
       },
       {
         "slug": "Transmission",
@@ -121,7 +130,7 @@ const BRANDS = [
         "icon": "switch",
         "blurb": "สวิตช์ PoE, ePoE, Core Switch และอุปกรณ์ไร้สายสำหรับงานระบบกล้อง",
         "url": "https://www.dahuasecurity.com/th/Products/All-Products/Transmission",
-        "count": 78
+        "count": 79
       },
       {
         "slug": "Storage",
@@ -211,7 +220,7 @@ const BRANDS = [
         "icon": "cert",
         "blurb": "รุ่นที่ตรงตามเกณฑ์ราคากลางและคุณลักษณะพื้นฐานครุภัณฑ์คอมพิวเตอร์ (DE64)",
         "url": "https://www.dahuasecurity.com/th/Products/All-Products/DE-2564",
-        "count": 26
+        "count": 27
       }
     ]
   },
@@ -233,7 +242,7 @@ const BRANDS = [
         "icon": "board",
         "blurb": "จอสัมผัสสำหรับห้องประชุมและห้องเรียน เขียน วาด และแชร์หน้าจอได้ทันที",
         "url": "https://www.samsung.com/th/business/smart-signage/interactive-display/",
-        "count": 11
+        "count": 15
       },
       {
         "slug": "qled-8k-signage",
@@ -251,7 +260,7 @@ const BRANDS = [
         "icon": "display",
         "blurb": "จอป้ายดิจิทัล 4K สำหรับงานค้าปลีกและองค์กร",
         "url": "https://www.samsung.com/th/business/smart-signage/uhd-4k-signage/",
-        "count": 11
+        "count": 19
       },
       {
         "slug": "video-wall",
@@ -260,7 +269,7 @@ const BRANDS = [
         "icon": "grid",
         "blurb": "จอวิดีโอวอลล์ขอบบางพิเศษ ต่อกันเป็นผืนใหญ่",
         "url": "https://www.samsung.com/th/business/smart-signage/video-wall/",
-        "count": 6
+        "count": 7
       },
       {
         "slug": "outdoor-signage",
@@ -291,7 +300,7 @@ const BRANDS = [
         "icon": "board",
         "blurb": "จอสัมผัสอัจฉริยะสำหรับห้องประชุมและการเรียนการสอน",
         "url": "https://www.maxhub.com/us/interactive-flat-panel/",
-        "count": 1
+        "count": 4
       },
       {
         "slug": "commercial-display",
@@ -309,7 +318,7 @@ const BRANDS = [
         "icon": "grid",
         "blurb": "จอ LED แบบ Direct View ทั้งภายในและภายนอกอาคาร",
         "url": "https://www.maxhub.com/us/dvled/",
-        "count": 4
+        "count": 6
       },
       {
         "slug": "audio-video",
@@ -318,7 +327,7 @@ const BRANDS = [
         "icon": "conference",
         "blurb": "กล้อง ไมค์ ลำโพง และอุปกรณ์ประชุมทางไกล",
         "url": "https://www.maxhub.com/us/audio-video/",
-        "count": 6
+        "count": 10
       },
       {
         "slug": "mtr",

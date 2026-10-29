@@ -7,6 +7,52 @@ Live site: https://lallathailand.com · Repo: thailandosm-pixel/lalla-website
 
 ---
 
+## 2026-10-29 — 63 products from the SiS Thailand price book
+
+Checked against **SiS Distribution (Thailand)**: its category pages list
+Dahua, Samsung and MAXHUB under LED Signage / LFD / E-Board, and its October
+2026 price book lists the exact models it stocks. Only models in that price
+book were added, and only ones not already on the site. Per category: the
+flagship models plus the entry-level / lowest-priced ones, not the whole list.
+
+Each has its own product page in the existing template — photo, description,
+grouped spec table and datasheet link — taken from the manufacturer's own site.
+
+| Brand | Category | Added |
+| --- | --- | --- |
+| Samsung | UHD 4K signage | QB43C, QB55C, QM43C, QM55C, QM65C, QH55C, QH65C, SH37C |
+| Samsung | Interactive display | WM55B, WM75F, WA65F-P, WA75F-P |
+| Samsung | Video wall | VM46B-U |
+| MAXHUB | Interactive flat panel | XBoard V7 Series, E3 Series, U4 Series |
+| MAXHUB | Direct View LED | Raptor Series V3, Raptor Series V3 Lite |
+| MAXHUB | Audio & Video | XBar U50, V50, V70, W70 |
+| Dahua | Display & Control | PHMIA108-CC, PHMIA135-CF (all-in-one LED); LDH43/55/65-LAI400L, LDV55/65-SAI400L, LDV43/55-SAI400TL (signage) |
+| Dahua | Interactive Whiteboards | LPH65-MC480-U, LPH65/75/86-ST420, PKC-MS0A stand, PKP-IP1A pen, PKP-WP1B dongle |
+| Dahua | Network Cameras | IPC-HDW8441X-3D, IPC-MFW5241T2-E3-ASE |
+| Dahua | DE64 | IPC-HFW1230C-A |
+| Dahua | PTZ Cameras | SD3D216NB-GNY |
+| Dahua | **Wireless Products (new category)** | IPC-HFW1339DTK1-SAW-IL, IPC-HFW1539DTK1-SAW-IL, P3AS-PV, P5AS-PV |
+| Dahua | HDCVI Cameras | HAC-HFW1200RM-IL-T, HAC-HFW1200TLM-IL-T, HAC-HFW1500TLM-IL-T, HAC-HDW1500TLM-IL-A, HAC-HFW1249X-A-PRO, HAC-HDW1249X-A-PRO, HAC-HFW1549X-A-PRO |
+| Dahua | Network Recorders | NVR4116HS-4KS3, NVR4216-4KS3, NVR4104HS-P-4KS3, NVR4108HS-8P-4KS3, NVR4208-8P-4KS3, NVR4216-16P-4KS3 |
+| Dahua | Transmission | CS4006-4ET2GT-60 |
+| Dahua | Access Control | ASI3204E-W |
+| Dahua | Video Intercom | VTH5341G-W, VTH5321GB-W |
+
+**Left out on purpose:** SiS models the manufacturer now lists as discontinued
+(NVR1108HS-W-S2, VTO2211G-WP, HAC-HFW1200R-Z-A), Samsung models with no page
+on samsung.com/th (QB24C, QM32C, WM65B), and SiS items with no manufacturer
+spec page (Dahua LCS-K4/K6 LED controllers, PHEIA2.5-TH, IFS-LIA2.5S-C module,
+PKC-MS2E stand). Samsung LED / The Wall is not in the SiS price book, so none
+was added. Prices are not shown on the site.
+
+MAXHUB XBar and Raptor Series V3 pages publish no spec table, so those five
+show MAXHUB's product overview and feature list instead, like the existing
+MAXHUB marketing-page products.
+
+Category counts, the sitemap (773 URLs) and the README totals are updated.
+
+---
+
 ## 2026-10-26 — iMin self-service kiosks + category page fix
 
 **iMin Heron 1 (23.8") and Heron 1 mini (15.6")** added, with photos and full

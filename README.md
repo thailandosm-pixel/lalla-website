@@ -27,7 +27,7 @@ Click a product → the detail page.
 ```
 css/style.css        Design system — tokens at the top
 js/brands.js         ← BRANDS + their product groups (counts, icons, Thai names)
-js/models.js         ← 669 products (Dahua 598, Samsung 48, MAXHUB 21, iMin 2)
+js/models.js         ← 732 products (Dahua 639, Samsung 61, MAXHUB 30, iMin 2)
 js/specs/<key>.js    Full spec tables for every brand, loaded on demand
                      (dahua-<group>.js, samsung.js, maxhub.js, imin.js)
 js/featured.js       ← the products shown on the home page
@@ -44,13 +44,18 @@ v1-original/         The first draft, kept intact
 
 | Brand | Source | Products | Full specs stored locally |
 | --- | --- | --- | --- |
-| Dahua | dahuasecurity.com/th/Products | 598 (22 categories) | 581 |
-| Samsung | samsung.com/th/business/smart-signage | 48 | 48 |
-| MAXHUB | maxhub.com/us | 21 | 9 + 12 with feature copy |
+| Dahua | dahuasecurity.com/th/Products, display.dahuasecurity.com | 639 (23 categories) | 622 |
+| Samsung | samsung.com/th/business/smart-signage | 61 | 61 |
+| MAXHUB | maxhub.com/us, maxhub.com/en | 30 | 13 + 17 with feature copy |
 | iMin (sourced via SiS) | imin.com/products | 2 | 2 |
 
-**638 of 667 products carry a full spec table on this site**; 650 carry
-substantive content. Nothing is fetched from the manufacturers at view time —
+**698 of 732 products carry a full spec table on this site**; 715 carry
+substantive content.
+
+The 63 models added on 2026-10-29 were chosen from the **SiS Distribution
+(Thailand) price book, October 2026** (sisthai.com → Pricebook), so every one
+is stocked in Thailand. They are flagship and entry-level picks per category,
+not the full SiS list. Nothing is fetched from the manufacturers at view time —
 every spec, image and description is stored in this folder.
 
 The 17 Dahua and 12 MAXHUB products without a spec table are ones where the

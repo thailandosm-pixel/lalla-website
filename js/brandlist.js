@@ -53,7 +53,7 @@ root.innerHTML = `
         ${DEALER_BRANDS.map(b => {
           const total = b.groups.reduce((n, g) => n + (g.count || 0), 0);
           return `
-            <a class="brand-card reveal" href="brand.html?id=${encodeURIComponent(b.id)}">
+            <a class="brand-card reveal" href="${brandUrl(b.id)}">
               <span class="brand-mark">${brandMark(b)}</span>
               <span class="brand-tag">${esc(b.tagline)}</span>
               <span class="brand-blurb th">${esc(b.blurb)}</span>
@@ -80,7 +80,7 @@ root.innerHTML = `
         ${SOURCED.map(b => {
           const total = b.groups.reduce((n, g) => n + (g.count || 0), 0);
           return `
-          <a class="supply-card has-catalog reveal" href="brand.html?id=${encodeURIComponent(b.id)}">
+          <a class="supply-card has-catalog reveal" href="${brandUrl(b.id)}">
             <span class="supply-name">${esc(b.name)}</span>
             <span class="supply-sub th">${esc(b.groups.map(g => g.nameTh || g.name).join(' · '))}</span>
             <span class="supply-link">ดู ${total} รุ่น ›</span>

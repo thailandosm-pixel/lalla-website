@@ -1,0 +1,75 @@
+# Build, check, deploy.
+#
+# 1. tools/build.mjs writes _site/: the site plus a static HTML page per
+#    product, category and brand (that is what makes them searchable).
+# 2. The gate loads every page template at desktop and phone width and
+#    fails on a JavaScript error, a page that did not render, or a WCAG
+#    2.1 AA violation.
+# 3. Only if both pass is _site/ published to GitHub Pages. A broken
+#    change never reaches the live site - it stays on the last good one.
+#
+# Pull requests run steps 1-2 only.
+name: Build, check, deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+
+      - name: Build the static site
+        run: node tools/build.mjs --check
+
+      - name: Install the page checker
+        run: |
+          npm init -y >/dev/null
+          npm pkg set type=module >/dev/null
+          npm install --no-audit --no-fund \
+            puppeteer@23 @axe-core/puppeteer@4 http-server@14
+
+      - name: Serve the built site
+        run: |
+          npx http-server _site -p 8080 --silent &
+          for i in $(seq 1 30); do
+            curl -sf http://127.0.0.1:8080/index.html >/dev/null && break
+            sleep 1
+          done
+
+      - name: Every page renders, runs clean, and passes axe
+        run: node .github/scripts/a11y.mjs
+
+      - name: Package for Pages
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

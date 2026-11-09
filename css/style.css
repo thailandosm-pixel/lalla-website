@@ -2177,3 +2177,66 @@ body.has-consent-bar { scroll-padding-bottom: 120px; }
   background-size: 18px 18px;
 }
 .qf select:focus { background-color: var(--bg); }
+
+/* Thai summary paragraph on product and category heroes (js/pages.js).
+   Real copy for people and search engines alike - so it is styled as
+   readable body text under the lead, not hidden or shrunk. */
+.product-intro {
+  max-width: 62ch;
+  margin: 14px auto 0;
+  color: var(--text-2);
+  font-size: 16px;
+  line-height: 1.7;
+}
+.hero-dark .product-intro { color: #a1a1a6; }
+
+/* ============================================================
+   Home: browse by type (index.html #browse)
+   Plain link lists, visible without JavaScript - they exist so
+   people and search engines alike can reach every category.
+   ============================================================ */
+.browse-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.browse-col {
+  background: var(--bg-alt);
+  border-radius: var(--radius);
+  padding: 26px 26px 18px;
+}
+.browse-title {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+.browse-col ul { list-style: none; }
+.browse-col li + li { border-top: 1px solid var(--hairline-soft); }
+.browse-col a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 0;
+  font-size: 15px;
+  color: var(--text);
+  transition: color 0.2s var(--ease);
+}
+.browse-col a::after { content: '›'; color: var(--green-dark); font-size: 18px; }
+.browse-col a:hover { color: var(--green-dark); }
+
+@media (max-width: 900px) {
+  .browse-cols { grid-template-columns: 1fr; }
+}
+/* Phone: the three browse panels swipe sideways like the other home
+   sections instead of stacking ~1,400px tall. Needs both classes to
+   beat the single-class .browse-cols rule above. */
+@media (max-width: 734px) {
+  .browse-cols.swipe-row {
+    grid-template-columns: none;
+    grid-auto-columns: 84%;
+    gap: 12px;
+  }
+  .browse-cols.swipe-row .browse-col { padding: 22px 20px 12px; }
+}

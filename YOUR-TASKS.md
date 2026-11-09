@@ -1,6 +1,6 @@
 # สิ่งที่คุณต้องทำเอง — Tasks only you can do
 
-Last updated: 2026-10-15
+Last updated: 2026-11-09
 
 Claude cannot do these, for one of three reasons: they need **your Google /
 Squarespace / GitHub login**, they need a **payment**, or they need a
@@ -11,27 +11,34 @@ Tell Claude the number of any task and it will walk you through it.
 
 ---
 
-## 1. Google Search Console — connect the site 🔴 important
+## 1. Google Search Console — resubmit the sitemap 🔴 do this first, 5 minutes
 
-**Why Claude can't:** it needs you to sign in to your Google account.
+**Why Claude can't:** it needs your Google login. (Search Console was verified
+on 2026-10-16 with the TXT record - that part is done.)
 
-**Why it matters:** right now you have no idea what Google sees. No indexing
-errors, no idea which searches bring people to you, no way to ask Google to
-re-crawl after a change. It is also how you check whether "lallath" is
-actually finding you.
-
-**Already prepared for you:** `robots.txt` and `sitemap.xml` (705 URLs) are
-live, so you only need to point Search Console at them.
+**Why now:** on 2026-11-09 the site changed how its pages are built. Every
+product, category and brand now has its own page with real content
+(e.g. `lallathailand.com/dahua-network-cameras.html`). The old sitemap pointed
+at `product.html?id=…` pages that were empty to Google. The new sitemap lists
+**774 pages** - Google needs to be told to read it again.
 
 **Steps**
-1. Go to https://search.google.com/search-console
-2. Add property → **Domain** → `lallathailand.com`
-3. It gives you a **TXT record**. Add it in Squarespace:
-   `account.squarespace.com/domains` → lallathailand.com → DNS → Custom Records
-   → TYPE `TXT`, NAME `@`, DATA = the value Google gives you
-4. Back in Google, click **Verify** (may take a few minutes)
-5. Left menu → **Sitemaps** → enter `sitemap.xml` → Submit
-6. Check back in ~1 week: Pages report, and Performance to see your queries
+1. https://search.google.com/search-console → property **lallathailand.com**
+2. Left menu → **Sitemaps**. If an old `sitemap.xml` is listed, that's fine -
+   type `sitemap.xml` again and click **Submit** so it is re-read
+3. Top search bar → paste each URL below → **Request indexing** (one at a time;
+   Google allows ~10 a day, so start with these):
+   - `https://lallathailand.com/`
+   - `https://lallathailand.com/dahua.html`
+   - `https://lallathailand.com/dahua-network-cameras.html`
+   - `https://lallathailand.com/dahua-display-control.html`
+   - `https://lallathailand.com/dahua-interactive-whiteboards.html`
+   - `https://lallathailand.com/samsung-interactive-display.html`
+   - `https://lallathailand.com/samsung-uhd-4k-signage.html`
+   - `https://lallathailand.com/maxhub-interactive-flat-panel.html`
+   - `https://lallathailand.com/dahua-ptz-cameras.html`
+4. Check back in 1-2 weeks: **Pages** (how many indexed) and **Performance**
+   (which searches show you). Tell Claude what you see.
 
 ---
 
@@ -180,3 +187,5 @@ sales categories on your own site.
 - ✅ Dell on the brands page verified against your Company Profile (it is correct)
 - ✅ Quote form sends for real; no more false success screen
 - ✅ Google Search Console TXT record added and live in DNS
+- ✅ Every product, category and brand has its own searchable page (2026-11-09)
+- ✅ Internal notes (this file, CHANGELOG, README) no longer published on the site

@@ -7,6 +7,64 @@ Live site: https://lallathailand.com · Repo: thailandosm-pixel/lalla-website
 
 ---
 
+## 2026-11-09 — Every product is now a real, searchable page
+
+**The problem.** Every product, category and brand page was an empty shell:
+before JavaScript ran, all 700+ product pages had the title `Product | Lalla
+ลัลลา`, the same description, and a body reading `กำลังโหลด…`. Google can run
+JavaScript, but for a new, low-authority domain it does so late and
+selectively - so to a search engine the catalogue was essentially invisible.
+
+**The fix: a build step.** `tools/build.mjs` now writes a static HTML page for
+each item - **726 product pages, 36 category pages, 4 brand pages** - with:
+
+- the full content in the HTML itself (a typical product: ~5,500 characters of
+  text and its whole spec table, readable without JavaScript)
+- a Thai title built from what people search, e.g.
+  `Dahua IPC-HFW3841T-ZAS-S2 กล้องวงจรปิด IP | สอบถามราคา — Lalla`,
+  `กล้องวงจรปิด IP Dahua 75 รุ่น | สเปก ติดตั้ง สอบถามราคา — Lalla`
+- a Thai description, and a Thai summary paragraph on the page itself
+- a canonical URL with brand and model in it (`/dahua-ipc-hfw3841t-zas-s2.html`)
+- structured data: `Product` + `BreadcrumbList` on products,
+  `CollectionPage` + `ItemList` on categories
+- a sitemap of all 774 URLs
+
+Thai search terms per category (กล้องวงจรปิด IP, จอ LED, จอสัมผัส, ป้ายดิจิทัล,
+เครื่องสแกนใบหน้า, EV Charger …) are kept in `SEO_TERMS` in `js/pages.js`.
+
+**Home page.** New title leading with กล้องวงจรปิด / จอ LED / จอสัมผัส, and a new
+**ค้นหาสินค้าตามประเภท** section: 22 plain links, worded as people search,
+straight from the strongest page on the site to every category. On phones
+it swipes like the other sections.
+
+**One template, two users.** Page markup moved into `js/pages.js`, used by
+both the build and the in-browser pages - so they cannot drift. Opening the
+source folder without building still works. All internal links go through
+`js/urls.js`; old `product.html?id=` links forward to the new pages
+(keeping any `#specs` anchor).
+
+**Faster.** Static product pages no longer load the 387 KB catalogue file.
+
+**Deploy is now gated.** `.github/workflows/deploy.yml` builds, then loads
+every page template at desktop and phone width, and deploys only if there is
+no JavaScript error, no unrendered page and no accessibility violation.
+
+That last part fixes a real gap. On 2026-10-21 a change of mine made every
+category page throw before rendering (`models` read before it was defined),
+and they stayed on "กำลังโหลด…" until another session fixed it on 2026-10-26.
+The old check passed it - a page stuck on a loading message has no
+accessibility violations. The new gate was tested against that exact bug and
+fails on it.
+
+**No longer published:** `YOUR-TASKS.md`, `CHANGELOG.md` and `README.md` were
+publicly readable at lallathailand.com/YOUR-TASKS.md etc. The build excludes
+`*.md`, `tools/`, `_generator/` and the archived `v1-original/`.
+
+**Checked:** 10,011 internal links across 773 pages, 0 broken, 0 missing
+images; 20 page/viewport combinations pass the gate.
+
+---
+
 ## 2026-10-29 — 63 products from the SiS Thailand price book
 
 Checked against **SiS Distribution (Thailand)**: its category pages list

@@ -93,7 +93,7 @@ function renderNav(active) {
   ];
 
   return `
-    <nav class="nav" id="siteNav">
+    <nav class="nav" id="siteNav" aria-label="เมนูหลัก">
       <div class="nav-inner">
         <a class="nav-logo" href="index.html" aria-label="Lalla ลัลลา — หน้าแรก">
           <img src="assets/cutout/lalla-logo.png" alt="Lalla ลัลลา" />
@@ -125,9 +125,9 @@ function renderFooter() {
           <div class="footer-col">
             <h2>Our Products</h2>
             <ul>
-              <li><a href="brand.html?id=dahua">Dahua</a></li>
-              <li><a href="brand.html?id=samsung">Samsung Smart Signage</a></li>
-              <li><a href="brand.html?id=maxhub">MAXHUB</a></li>
+              <li><a href="${brandUrl('dahua')}">Dahua</a></li>
+              <li><a href="${brandUrl('samsung')}">Samsung Smart Signage</a></li>
+              <li><a href="${brandUrl('maxhub')}">MAXHUB</a></li>
               <li><a href="index.html#featured">สินค้าแนะนำ</a></li>
               <li><a href="brands.html">แบรนด์ทั้งหมด</a></li>
             </ul>
@@ -135,7 +135,7 @@ function renderFooter() {
           <div class="footer-col">
             <h2>ข้อมูลทางเทคนิค</h2>
             <ul>
-              <li><a href="product.html?id=dhi-phria2-5-pl#specs">Tech Specs</a></li>
+              <li><a href="${productUrl('dhi-phria2-5-pl', 'dahua')}#specs">Tech Specs</a></li>
               <li><a href="pdf/DHI-PHRIA2.5-PL _ Dahua LED Poster Screen.pdf" target="_blank" rel="noopener">ดาวน์โหลดโบรชัวร์</a></li>
             </ul>
           </div>

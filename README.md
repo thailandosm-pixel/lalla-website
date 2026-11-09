@@ -1,10 +1,48 @@
 # Lalla × Dahua · Samsung · MAXHUB — Website
 
-Static site. No build step. Open `index.html`, or serve the folder:
+Static site with one build step, run automatically on every push.
 
 ```
-python3 -m http.server 8000
+node tools/build.mjs                     # writes _site/ - what is deployed
+python3 -m http.server 8000 -d _site     # preview exactly what goes live
 ```
+
+Serving the source folder directly (`python3 -m http.server 8000`) still
+works too: pages render in the browser from the same templates, with the
+older `product.html?id=` style links. Use `_site/` to see the real thing.
+
+## How it is built and deployed
+
+Every push to `main` runs `.github/workflows/deploy.yml`:
+
+1. **Build** - `tools/build.mjs` copies the site into `_site/` and writes a
+   **static HTML page for every product, category and brand**
+   (`dahua-ipc-hfw3841t-zas-s2.html`, `dahua-network-cameras.html`,
+   `dahua.html` …) with its real content, a Thai title and description,
+   a canonical URL and structured data, plus `sitemap.xml`.
+2. **Check** - every page template is loaded at desktop and phone width;
+   the run fails on a JavaScript error, a page that did not render, or an
+   accessibility (WCAG 2.1 AA) violation.
+3. **Deploy** - only if both pass. A broken change never goes live; the
+   site stays on the last good version.
+
+Why static pages: before this, every product page was an empty shell that
+said "กำลังโหลด…" until JavaScript filled it in, and all 700+ had the same
+title. Search engines saw nothing to index.
+
+**Rules that keep this working**
+
+- Page markup lives **once**, in `js/pages.js`. Both the build and the
+  in-browser pages use it - edit it there, never by hand in `_site/`.
+- Build every internal link through `js/urls.js` (`productUrl`,
+  `categoryUrl`, `brandUrl`) - never write `product.html?id=` yourself.
+- Thai search terms per category are in `SEO_TERMS` at the top of
+  `js/pages.js`. Keep them accurate and without the brand name (the build
+  rejects a repeat).
+- Adding products needs no extra step: add them to `js/models.js` (and
+  `js/brands.js` counts), push, and their pages are generated.
+- `_site/` is build output - never commit it.
+- `*.md`, `tools/`, `_generator/` and `v1-original/` are never published.
 
 ## Page flow
 
@@ -34,7 +72,11 @@ js/featured.js       ← the products shown on the home page
 js/works.js          ← PROJECT REFERENCES (6 projects + photo sets)
 js/brandlist.js      Renders brands.html
 js/products.js       Hand-authored rich products (DHI-PHRIA2.5-PL)
+js/pages.js          ← PAGE TEMPLATES + Thai SEO terms (shared by build and browser)
+js/urls.js           Every internal URL; flips to static URLs in the build
+js/static.js         Behaviour for the generated static pages
 js/home.js  brand.js  category.js  detail.js  app.js
+tools/build.mjs      The build - writes _site/
 assets/products*/    Product photos (WebP)
 _generator/          The scrapers used to build the data (reference only)
 v1-original/         The first draft, kept intact

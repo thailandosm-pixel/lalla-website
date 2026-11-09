@@ -86,7 +86,7 @@ if (!work) {
         </div>
         <div class="works-grid">
           ${others.map(w => `
-            <a class="work-card reveal" href="work.html?id=${encodeURIComponent(w.id)}">
+            <a class="work-card reveal" href="${workUrl(w.id)}">
               <div class="work-media"><img src="${esc(w.cover)}" alt="${esc(w.title)}" loading="lazy" /></div>
               <div class="work-cap">
                 <span class="work-tag">${esc(w.product)}</span>

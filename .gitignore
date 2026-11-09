@@ -6,3 +6,7 @@
 .claude/
 __pycache__/
 *.pyc
+_site/
+node_modules/
+/package.json
+/package-lock.json

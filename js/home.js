@@ -10,7 +10,7 @@ if (brandGrid) {
   brandGrid.innerHTML = DEALER_BRANDS.map(b => {
     const total = b.groups.reduce((n, g) => n + (g.count || 0), 0);
     return `
-      <a class="brand-card reveal" href="brand.html?id=${encodeURIComponent(b.id)}">
+      <a class="brand-card reveal" href="${brandUrl(b.id)}">
         <span class="brand-mark">${brandMark(b)}</span>
         <span class="brand-tag">${esc(b.tagline)}</span>
         <span class="brand-blurb th">${esc(b.blurb)}</span>
@@ -40,7 +40,7 @@ if (brandGrid) {
 const featGrid = document.getElementById('featured-grid');
 if (featGrid && typeof FEATURED !== 'undefined') {
   featGrid.innerHTML = FEATURED.map(f => `
-    <a class="mcard reveal" href="product.html?id=${encodeURIComponent(f.id)}">
+    <a class="mcard reveal" href="${productUrl(f.id, f.brand)}">
       <span class="mcard-media">
         ${f.img ? `<img src="${esc(f.img)}" alt="${esc(f.model)}" loading="lazy" />`
                 : `<span class="mcard-noimg">ไม่มีรูป</span>`}
@@ -105,7 +105,7 @@ if (stepGrid) {
 const worksGrid = document.getElementById('works-grid');
 if (worksGrid && typeof WORKS !== 'undefined') {
   worksGrid.innerHTML = WORKS.map(w => `
-    <a class="work-card reveal" href="work.html?id=${encodeURIComponent(w.id)}">
+    <a class="work-card reveal" href="${workUrl(w.id)}">
       <div class="work-media"><img src="${esc(w.cover)}" alt="${esc(w.title)}" loading="lazy" /></div>
       <div class="work-cap">
         <span class="work-tag">${esc(w.product)}</span>

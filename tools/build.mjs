@@ -82,6 +82,21 @@ vm.runInContext(
 const S = ctx.__;
 const SPECS = ctx.window.SPECS || {};
 
+/* Spec text is scraped; reject scraper template leftovers before they
+   reach a page. ("{v.name} -->" sat on live pages 3,405 times until
+   2026-11-09.) */
+{
+  const junk = /\{v[0-9.a-z]*\}|-->|\[object Object\]|\bundefined\b/;
+  let bad = 0;
+  for (const [key, byId] of Object.entries(SPECS))
+    for (const [id, p] of Object.entries(byId))
+      for (const sec of (p && p.sections) || [])
+        for (const it of sec.items || [])
+          if (junk.test(`${it.label} ${it.value}`) && bad++ < 5)
+            problem(`spec ${key}/${id}: scraper leftover in "${String(it.label).slice(0, 40)}"`);
+  if (bad > 5) problem(`...and ${bad - 5} more spec rows with scraper leftovers`);
+}
+
 /* ── 3. Page shell ──────────────────────────────────────────── */
 const CSP = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; "
   + "font-src 'self'; connect-src 'self' https://api.web3forms.com; form-action 'self'; base-uri 'self'; "

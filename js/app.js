@@ -136,9 +136,16 @@ function renderFooter() {
             <h2>บริการ</h2>
             <ul>
               <li><a href="${landingUrl('screen-installation')}">รับติดตั้งจอ</a></li>
-              <li><a href="${landingUrl('cctv-installation')}">ติดตั้งกล้องวงจรปิด</a></li>
+              <li><a href="${landingUrl('led-screen')}">จอ LED</a></li>
+              <li><a href="${landingUrl('digital-signage')}">ป้ายดิจิทัล</a></li>
+              <li><a href="${landingUrl('video-wall')}">วิดีโอวอลล์</a></li>
               <li><a href="${landingUrl('smart-classroom')}">ห้องเรียนอัจฉริยะ</a></li>
               <li><a href="${landingUrl('interactive-display')}">จอ interactive</a></li>
+              <li><a href="${landingUrl('cctv-installation')}">ติดตั้งกล้องวงจรปิด</a></li>
+              <li><a href="${landingUrl('access-control')}">เครื่องสแกนใบหน้า</a></li>
+              <li><a href="${landingUrl('meeting-room')}">ห้องประชุมออนไลน์</a></li>
+              <li><a href="${landingUrl('queue-kiosk')}">ตู้กดบัตรคิว</a></li>
+              <li><a href="${landingUrl('ev-charger')}">EV Charger</a></li>
             </ul>
           </div>
           <div class="footer-col">

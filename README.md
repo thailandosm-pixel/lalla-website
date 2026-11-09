@@ -39,8 +39,11 @@ title. Search engines saw nothing to index.
 - Thai search terms per category are in `SEO_TERMS` at the top of
   `js/pages.js`. Keep them accurate and without the brand name (the build
   rejects a repeat).
-- Service pages (ห้องเรียนอัจฉริยะ, รับติดตั้งจอ, ติดตั้งกล้องวงจรปิด, จอ interactive)
-  are written in `js/landing.js`. Use ordinary `product.html?id=` /
+- The 11 topic pages (ห้องเรียนอัจฉริยะ, จอ interactive, รับติดตั้งจอ, จอ LED,
+  ป้ายดิจิทัล, วิดีโอวอลล์, กล้องวงจรปิด, สแกนใบหน้า, ห้องประชุม, ตู้คิว, EV Charger)
+  are written in `js/landing.js`; which product groups link to which page is
+  `SERVICE_MAP` in `js/pages.js`. Never make near-copies per city or per
+  keyword variation - Google penalises those as doorway pages. Use ordinary `product.html?id=` /
   `category.html?...` links there - the build rewrites them and fails if
   any target does not exist. Only write claims that are true for Lalla.
 - Adding products needs no extra step: add them to `js/models.js` (and

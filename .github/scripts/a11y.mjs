@@ -29,6 +29,8 @@ const PAGES = [
   '/samsung-wa86f.html',
   '/smart-classroom.html',                        /* service pages (js/landing.js) */
   '/cctv-installation.html',
+  '/led-screen.html',
+  '/ev-charger.html',
   '/work.html?id=sacred-heart-chiangmai',
   '/product.html?id=lph86-mc480-u',               /* old link: must forward */
 ];

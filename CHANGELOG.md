@@ -7,6 +7,53 @@ Live site: https://lallathailand.com · Repo: thailandosm-pixel/lalla-website
 
 ---
 
+## 2026-11-09 — 11 topic pages, and 3,405 lines of scraper junk removed
+
+**Seven more pages**, one per distinct customer need, so the site covers
+what people search rather than only model numbers:
+
+| Page | Targets |
+|---|---|
+| `led-screen.html` | จอ LED, จอ LED Wall, จอ LED กลางแจ้ง / ในอาคาร, Pixel Pitch P1.2–P4 |
+| `digital-signage.html` | ป้ายดิจิทัล, Digital Signage, จอโฆษณา, จอตั้งพื้น, จอ E-Paper |
+| `video-wall.html` | วิดีโอวอลล์, Video Wall, จอต่อกัน, ห้องควบคุม |
+| `meeting-room.html` | อุปกรณ์ห้องประชุม, ระบบประชุมออนไลน์, Video Conference, Teams Rooms |
+| `queue-kiosk.html` | ตู้กดบัตรคิว, ระบบคิว, ตู้คีออสก์, ตู้สั่งอาหาร |
+| `access-control.html` | เครื่องสแกนใบหน้า, เครื่องสแกนนิ้ว, Access Control, บันทึกเวลา |
+| `ev-charger.html` | เครื่องชาร์จรถยนต์ไฟฟ้า, EV Charger, AC 22 kW, DC 80–240 kW |
+
+`interactive-display.html` was rebuilt: a 55–98″ size table across all
+three brands (real models only), the other names people search (Smart Board,
+จอทัชสกรีน, Interactive Flat Panel, กระดานดิจิทัล), Android vs Windows, more FAQ.
+
+Claims checked against the data before publishing; corrections made:
+the D-Volt AC chargers need **3-phase 400 V** (most Thai homes are 1-phase -
+stated plainly); ASC2104B-T is a slave/expansion module, not a standalone
+controller; only some access units record attendance; e-paper "no power
+cable" removed (not confirmed by the specs); LDV floor-standing stated only
+for the 65″ (2.15 m tall per spec).
+
+**Not built, on purpose:** near-copy pages per city ("ติดตั้งกล้องวงจรปิด
+นนทบุรี / กรุงเทพ / ..."). Google treats those as doorway pages and can
+penalise the whole site. Also no pages for Lighting System, Auto Parking or
+projectors yet - the first two are unconfirmed (YOUR-TASKS task 9) and there
+are no projector products in the catalogue.
+
+**Links:** homepage now shows all 11 as cards; the footer lists all 11 on
+every page; 737 product and category pages link to their topic page (EV
+chargers → ev-charger, Samsung kiosks → queue-kiosk, LED cabinets →
+led-screen, …).
+
+**Brand pages** now target dealer searches - `ตัวแทนจำหน่าย Dahua อย่างเป็นทางการ`
+(same for Samsung, MAXHUB). iMin, a sourced brand, is not called a dealership.
+
+**Data bug fixed:** scraped spec tables carried `{v.name} -->` template
+leftovers - **3,405 of them across 8 spec files**, visible on live product
+pages (43 on a single EV charger page) and now indexable by Google. Removed,
+and the build now fails if any come back (verified against the old data).
+
+---
+
 ## 2026-11-09 — Service pages for the words customers actually search
 
 Model-number pages are easy to rank but almost nobody searches model numbers.

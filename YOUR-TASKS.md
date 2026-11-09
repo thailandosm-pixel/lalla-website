@@ -34,6 +34,12 @@ at `product.html?id=…` pages that were empty to Google. The new sitemap lists
    - `https://lallathailand.com/cctv-installation.html`
    - `https://lallathailand.com/interactive-display.html`
    - `https://lallathailand.com/`
+
+   **Next day**, the second batch (Google's daily limit is ~10):
+   `led-screen.html`, `digital-signage.html`, `video-wall.html`,
+   `meeting-room.html`, `queue-kiosk.html`, `access-control.html`,
+   `ev-charger.html` - all under `https://lallathailand.com/`.
+   The sitemap covers every page anyway; requesting just speeds it up.
    - `https://lallathailand.com/dahua.html`
    - `https://lallathailand.com/dahua-network-cameras.html`
    - `https://lallathailand.com/dahua-display-control.html`
@@ -216,5 +222,6 @@ goes straight onto the pages:
 - ✅ Quote form sends for real; no more false success screen
 - ✅ Google Search Console TXT record added and live in DNS
 - ✅ Every product, category and brand has its own searchable page (2026-11-09)
-- ✅ Service pages for ห้องเรียนอัจฉริยะ, รับติดตั้งจอ, ติดตั้งกล้องวงจรปิด, จอ interactive (2026-11-09)
+- ✅ 11 topic pages: ห้องเรียนอัจฉริยะ, จอ interactive, รับติดตั้งจอ, จอ LED, ป้ายดิจิทัล, วิดีโอวอลล์,
+  ติดตั้งกล้องวงจรปิด, เครื่องสแกนใบหน้า, ห้องประชุมออนไลน์, ตู้กดบัตรคิว, EV Charger (2026-11-09)
 - ✅ Internal notes (this file, CHANGELOG, README) no longer published on the site

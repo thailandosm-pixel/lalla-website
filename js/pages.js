@@ -83,21 +83,41 @@ const BRAND_TERMS = {
 const SERVICE_PAGES = {
   'smart-classroom':     'ห้องเรียนอัจฉริยะ — คู่มือเลือกและติดตั้งกระดานอัจฉริยะ',
   'interactive-display': 'จอ interactive ทุกแบรนด์ — เปรียบเทียบและเลือกรุ่น',
-  'screen-installation': 'บริการรับติดตั้งจอ LED วิดีโอวอลล์ และป้ายดิจิทัล',
-  'cctv-installation':   'บริการรับติดตั้งกล้องวงจรปิดครบวงจร'
+  'screen-installation': 'บริการรับติดตั้งจอ',
+  'cctv-installation':   'บริการรับติดตั้งกล้องวงจรปิดครบวงจร',
+  'led-screen':          'จอ LED — เลือกระยะพิกเซลและติดตั้ง',
+  'digital-signage':     'ป้ายดิจิทัล — จอโฆษณาทุกแบบ',
+  'video-wall':          'วิดีโอวอลล์ — จอต่อกันขอบบาง',
+  'meeting-room':        'อุปกรณ์ห้องประชุมออนไลน์ครบชุด',
+  'queue-kiosk':         'ตู้กดบัตรคิวและตู้คีออสก์',
+  'access-control':      'เครื่องสแกนใบหน้าและระบบควบคุมการเข้าออก',
+  'ev-charger':          'เครื่องชาร์จรถยนต์ไฟฟ้า — AC และ DC'
 };
-function servicesFor(brandId, groupSlug) {
+const SERVICE_MAP = [
+  [/^(dahua\/Interactive-Whiteboards|samsung\/interactive-display|maxhub\/interactive-flat-panel)$/,
+                                                       ['smart-classroom', 'interactive-display']],
+  [/^dahua\/Display--Control$/,                        ['led-screen', 'digital-signage', 'video-wall']],
+  [/^maxhub\/dvled$/,                                  ['led-screen', 'screen-installation']],
+  [/^(samsung\/(qled-8k-signage|uhd-4k-signage|outdoor-signage)|maxhub\/commercial-display)$/,
+                                                       ['digital-signage', 'screen-installation']],
+  [/^samsung\/video-wall$/,                            ['video-wall', 'screen-installation']],
+  [/^maxhub\/(audio-video|mtr|accessories|software)$/, ['meeting-room']],
+  [/^imin\/self-service-kiosk$/,                       ['queue-kiosk']],
+  [/^dahua\/(Access-Control|Video-Intercoms)$/,        ['access-control', 'cctv-installation']],
+  [/^dahua\/Intelligent-EV-Charger$/,                  ['ev-charger']],
+  [/^dahua\/(Network-Cameras|HDCVI-Cameras|Thermal-Cameras|PTZ-Cameras|Wireless-Products|Network-Recorders|HDCVI-Recorders|Alarms|Storage|Transmission|Accessories|Dedicated-Products|DE-2564|Explosion-Proof--Anti-Corrosion|Mobile|Traffic)$/,
+                                                       ['cctv-installation']]
+];
+/* m (optional): a single product can override its group - e.g. the
+   Samsung kiosks live in "interactive-display" but belong with kiosks. */
+function servicesFor(brandId, groupSlug, m) {
+  if (m && /kiosk/i.test(`${m.model} ${m.desc || ''}`)) return ['queue-kiosk'];
   const g = `${brandId}/${groupSlug}`;
-  if (/^(dahua\/Interactive-Whiteboards|samsung\/interactive-display|maxhub\/interactive-flat-panel)$/.test(g))
-    return ['smart-classroom', 'interactive-display'];
-  if (/^(dahua\/Display--Control|samsung\/(qled-8k-signage|uhd-4k-signage|video-wall|outdoor-signage)|maxhub\/(dvled|commercial-display))$/.test(g))
-    return ['screen-installation'];
-  if (/^dahua\/(Network-Cameras|HDCVI-Cameras|Thermal-Cameras|PTZ-Cameras|Wireless-Products|Network-Recorders|HDCVI-Recorders|Video-Intercoms|Access-Control|Alarms|Storage|Transmission|Accessories|Dedicated-Products|DE-2564|Explosion-Proof--Anti-Corrosion|Mobile)$/.test(g))
-    return ['cctv-installation'];
-  return [];
+  const hit = SERVICE_MAP.find(([re]) => re.test(g));
+  return hit ? hit[1] : [];
 }
-function serviceLinks(brandId, groupSlug) {
-  const list = servicesFor(brandId, groupSlug);
+function serviceLinks(brandId, groupSlug, m) {
+  const list = servicesFor(brandId, groupSlug, m);
   if (!list.length) return '';
   return `<p class="service-links th">บริการที่เกี่ยวข้อง:
     ${list.map(slug => `<a href="${landingUrl(slug)}">${esc(SERVICE_PAGES[slug])} ›</a>`).join(' ')}</p>`;
@@ -150,7 +170,10 @@ const SEO = {
       + `ติดตั้ง และดูแลหลังการขายทั่วประเทศ`;
   },
   brandTitle(brand) {
-    return `${brand.name} ประเทศไทย — ${BRAND_TERMS[brand.id] || brand.tagline} | Lalla ลัลลา`;
+    const what = BRAND_TERMS[brand.id] || brand.tagline;
+    return isDealer(brand)
+      ? `ตัวแทนจำหน่าย ${brand.name} อย่างเป็นทางการ — ${what} | Lalla`
+      : `${brand.name} — ${what} | จำหน่ายโดย Lalla`;
   },
   brandDescription(brand) {
     const who = isDealer(brand) ? `ตัวแทนจำหน่าย ${brand.name} อย่างเป็นทางการในประเทศไทย` : `จำหน่ายโดย Lalla`;
@@ -316,7 +339,7 @@ const PAGES = {
       </div>
     </section>` : ''}
 
-    ${serviceLinks(m.brand, m.group) ? `<section class="section-tight"><div class="wrap">${serviceLinks(m.brand, m.group)}</div></section>` : ''}
+    ${serviceLinks(m.brand, m.group, m) ? `<section class="section-tight"><div class="wrap">${serviceLinks(m.brand, m.group, m)}</div></section>` : ''}
 
     ${contactCard('สนใจรุ่นนี้?', 'ปรึกษาผู้เชี่ยวชาญเพื่อประเมินหน้างานและใบเสนอราคา', true)}`;
   },

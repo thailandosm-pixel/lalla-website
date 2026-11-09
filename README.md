@@ -39,6 +39,10 @@ title. Search engines saw nothing to index.
 - Thai search terms per category are in `SEO_TERMS` at the top of
   `js/pages.js`. Keep them accurate and without the brand name (the build
   rejects a repeat).
+- Service pages (ห้องเรียนอัจฉริยะ, รับติดตั้งจอ, ติดตั้งกล้องวงจรปิด, จอ interactive)
+  are written in `js/landing.js`. Use ordinary `product.html?id=` /
+  `category.html?...` links there - the build rewrites them and fails if
+  any target does not exist. Only write claims that are true for Lalla.
 - Adding products needs no extra step: add them to `js/models.js` (and
   `js/brands.js` counts), push, and their pages are generated.
 - `_site/` is build output - never commit it.

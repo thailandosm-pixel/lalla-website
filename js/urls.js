@@ -52,6 +52,8 @@ function brandUrl(brand) {
   return LALLA_BUILT ? `${brandSlug(brand)}.html`
                      : `brand.html?id=${encodeURIComponent(brand)}`;
 }
+/* Service pages exist only as built static files (js/landing.js). */
+function landingUrl(slug) { return `${slugify(slug)}.html`; }
 function workUrl(id) {
   return `work.html?id=${encodeURIComponent(id)}`;
 }

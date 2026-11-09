@@ -70,14 +70,15 @@ const specFiles = fs.readdirSync(path.join(ROOT, 'js/specs')).filter(f => f.ends
 /* The published (LALLA_BUILT = true) urls.js goes first, so every link
    the templates build points at a static page. */
 const sources = ['js/brands.js', 'js/models.js', 'js/products.js', 'js/works.js',
-                 'js/app.js', 'js/pages.js', ...specFiles];
+                 'js/app.js', 'js/pages.js', 'js/landing.js', ...specFiles];
 const code = sources.map(f => fs.readFileSync(path.join(ROOT, f), 'utf8')).join('\n;\n');
 vm.runInContext(
   fs.readFileSync(urlsPath, 'utf8') + '\n;\n' + code + `
   globalThis.SEO_TERMS = SEO_TERMS;
+  globalThis.__landing = LANDING;
   globalThis.__ = { BRANDS, DEALER_BRANDS, MODELS, products, WORKS, SITE, SITE_URL,
     PAGES, SEO, esc, termsFor, isDealer, specsBlock,
-    productSlug, categorySlug, brandSlug, productUrl, categoryUrl, brandUrl };`, ctx);
+    productSlug, categorySlug, brandSlug, productUrl, categoryUrl, brandUrl, landingUrl };`, ctx);
 const S = ctx.__;
 const SPECS = ctx.window.SPECS || {};
 
@@ -300,6 +301,32 @@ for (const brand of S.BRANDS) {
   sitemap.push({ url, pri: '0.9' });
 }
 
+/* Service and solution pages (js/landing.js) */
+const landingPages = [];
+for (const p of ctx.__landing) {
+  const file = `${S.landingUrl(p.slug)}`;
+  claim(file, `landing ${p.slug}`);
+  const url = `${S.SITE_URL}/${file}`;
+  const ld = { '@context': 'https://schema.org', '@graph': [
+    { '@type': 'WebPage', '@id': `${url}#page`, name: p.h1, description: p.description, url, inLanguage: 'th-TH' },
+    { '@type': 'Service', name: p.service, serviceType: p.service, description: p.description, url,
+      provider: { '@id': `${S.SITE_URL}/#organization` },
+      areaServed: { '@type': 'Country', name: 'Thailand' } },
+    { '@type': 'FAQPage', mainEntity: p.faq.map(f => ({ '@type': 'Question', name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+    breadcrumbLd([home, { name: p.h1, url }])
+  ] };
+  landingPages.push({ file, html: page({
+    headHtml: head({ title: p.title, description: p.description, url, image: p.image, imageType: imgType(p.image), ld }),
+    subnav: '',
+    main: S.PAGES.landing(p),
+    mainId: 'landing-root',
+    data: { page: 'landing', active: '', model: p.service, landing: p.slug },
+    scripts: ['quote.js']
+  }) });
+  sitemap.push({ url, pri: '0.9' });
+}
+
 /* ── 5. Point links in the hand-written pages at the static ones ─
    index.html etc. are written with the old ?id= links so the
    unbuilt folder still works; the published copies link straight
@@ -330,6 +357,26 @@ for (const f of fs.readdirSync(OUT).filter(f => f.endsWith('.html') && !written.
   const p = path.join(OUT, f);
   fs.writeFileSync(p, rewriteLinks(fs.readFileSync(p, 'utf8'), f));
 }
+for (const lp of landingPages) fs.writeFileSync(path.join(OUT, lp.file), rewriteLinks(lp.html, lp.file));
+
+/* Every internal link and image in every published page must resolve.
+   (This was a manual check; now no build with a broken link can deploy.) */
+{
+  const pages = fs.readdirSync(OUT).filter(f => f.endsWith('.html'));
+  let checked = 0;
+  for (const f of pages) {
+    const html = fs.readFileSync(path.join(OUT, f), 'utf8');
+    const refs = [...html.matchAll(/(?:href|src)="([^"]+)"/g)].map(m => m[1].replace(/&amp;/g, '&'));
+    for (const ref of refs) {
+      if (/^(https?:|mailto:|tel:|#|data:|javascript:)/.test(ref)) continue;
+      const target = decodeURIComponent(ref.split(/[?#]/)[0]);
+      if (!target) continue;
+      checked++;
+      if (!fs.existsSync(path.join(OUT, target))) problem(`${f}: broken link or image -> ${ref}`);
+    }
+  }
+  console.log(`link check: ${checked} internal links and images across ${pages.length} pages`);
+}
 
 /* ── 6. Sitemap ─────────────────────────────────────────────── */
 const today = new Date().toISOString().slice(0, 10);
@@ -345,10 +392,10 @@ fs.writeFileSync(path.join(OUT, 'sitemap.xml'),
   + `\n</urlset>\n`);
 
 /* ── 7. Report ──────────────────────────────────────────────── */
-const kinds = { product: 0, 'rich product': 0, category: 0, brand: 0 };
+const kinds = { product: 0, 'rich product': 0, category: 0, brand: 0, landing: 0 };
 for (const who of written.values()) kinds[who.split(' ').slice(0, -1).join(' ')]++;
 console.log(`built _site/: ${kinds.product + kinds['rich product']} product pages, `
-  + `${kinds.category} category pages, ${kinds.brand} brand pages, `
+  + `${kinds.category} category pages, ${kinds.brand} brand pages, ${kinds.landing} service pages, `
   + `sitemap with ${extra.length + sitemap.length} URLs`);
 if (warnings.length) {
   console.log(`\n${warnings.length} warning(s):`);

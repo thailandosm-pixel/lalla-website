@@ -2240,3 +2240,100 @@ body.has-consent-bar { scroll-padding-bottom: 120px; }
   }
   .browse-cols.swipe-row .browse-col { padding: 22px 20px 12px; }
 }
+
+/* ============================================================
+   Service / solution pages (js/landing.js via PAGES.landing)
+   Long-form Thai copy: comfortable measure, real tables, FAQ.
+   ============================================================ */
+.landing-h2 { margin-bottom: 18px; }
+.landing-body { max-width: 72ch; font-size: 17px; line-height: 1.8; color: var(--text); }
+.landing-body p { margin-bottom: 14px; }
+.landing-body ul,
+.landing-body ol { margin: 0 0 14px 1.3em; }
+.landing-body li { margin-bottom: 8px; }
+.landing-body li::marker { color: var(--green-dark); }
+.landing-body a { color: var(--green-dark); text-decoration: underline; text-underline-offset: 2px; }
+.landing-body a:hover { text-decoration-thickness: 2px; }
+.landing-body strong { font-weight: 600; }
+.landing-body h3 { font-size: 19px; font-weight: 600; margin-bottom: 8px; }
+
+/* link lists read as a list of destinations, not bullets */
+.landing-body ul.landing-links { list-style: none; margin-left: 0; }
+.landing-body ul.landing-links li {
+  padding: 12px 0 12px 22px;
+  border-bottom: 1px solid var(--hairline-soft);
+  position: relative;
+  margin: 0;
+}
+.landing-body ul.landing-links li::before {
+  content: '›';
+  position: absolute; left: 4px; top: 11px;
+  color: var(--green-dark);
+  font-weight: 600;
+}
+
+.landing-table-wrap { overflow-x: auto; margin: 6px 0 16px; }
+.landing-table { width: 100%; border-collapse: collapse; font-size: 16px; min-width: 520px; }
+.landing-table th,
+.landing-table td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+.landing-table th { font-weight: 600; color: var(--text-2); font-size: 14px; background: var(--bg-alt); }
+.bg-alt .landing-table th { background: var(--bg); }
+
+.landing-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 100%; }
+.landing-card { background: var(--bg); border-radius: var(--radius); padding: 22px 22px 8px; }
+.section:not(.bg-alt) .landing-card { background: var(--bg-alt); }
+.landing-cards + p { margin-top: 14px; }
+
+/* FAQ: native <details>, so answers are in the HTML for search
+   engines and open/close with no JavaScript at all */
+.faq { max-width: 72ch; }
+.faq-item { border-bottom: 1px solid var(--hairline); }
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 18px 36px 18px 0;
+  font-size: 17px;
+  font-weight: 600;
+  position: relative;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+';
+  position: absolute; right: 4px; top: 14px;
+  font-size: 24px; font-weight: 400; color: var(--green-dark);
+  transition: transform 0.2s var(--ease);
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item summary:focus-visible { outline: 2px solid var(--green-dark); outline-offset: 3px; border-radius: 6px; }
+.faq-item p { padding: 0 0 18px; font-size: 16px; line-height: 1.75; color: var(--text-2); }
+
+/* "บริการที่เกี่ยวข้อง" line on product and category pages */
+.service-links { font-size: 15px; color: var(--text-2); margin-top: 16px; }
+.service-links a { color: var(--green-dark); font-weight: 500; margin-right: 14px; display: inline-block; padding-block: 6px; }
+.service-links a:hover { text-decoration: underline; }
+
+@media (max-width: 734px) {
+  .landing-body { font-size: 16px; }
+  .landing-cards { grid-template-columns: 1fr; }
+  .faq-item summary { font-size: 16px; }
+}
+
+/* Home: service cards (index.html #services) */
+.svc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.svc-card {
+  display: flex; flex-direction: column; gap: 8px;
+  background: var(--bg-alt);
+  border-radius: var(--radius);
+  padding: 24px 22px 20px;
+  color: var(--text);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.svc-card:hover { transform: translateY(-4px); box-shadow: 0 18px 38px rgba(0,0,0,0.08); }
+.svc-tag  { font-size: 12px; font-weight: 600; letter-spacing: 0.02em; color: var(--green-dark); }
+.svc-name { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
+.svc-desc { font-size: 14px; line-height: 1.6; color: var(--text-2); flex: 1; }
+.svc-go   { font-size: 14px; font-weight: 500; color: var(--green-dark); margin-top: 4px; }
+@media (max-width: 1000px) { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 734px) {
+  .svc-grid.swipe-row { grid-template-columns: none; grid-auto-columns: 74%; gap: 12px; }
+}

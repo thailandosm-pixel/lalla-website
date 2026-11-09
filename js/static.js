@@ -25,6 +25,9 @@
     lallaTrack('category_view', { brand: d.brand, category: d.group, models: Number(d.count) || 0 });
   } else if (d.page === 'brand') {
     lallaTrack('brand_view', { brand: d.brand });
+  } else if (d.page === 'landing') {
+    wireQuoteButton(d.model, []);
+    lallaTrack('landing_view', { landing: d.landing });
   }
 
   initReveal();

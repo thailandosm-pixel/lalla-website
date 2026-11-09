@@ -77,6 +77,32 @@ const BRAND_TERMS = {
   imin:    'ตู้คีออสก์บริการตนเอง'
 };
 
+/* ── Service page for each product group ─────────────────────────
+   Product and category pages link to the matching service page
+   (js/landing.js), so those pages get links from all over the site. */
+const SERVICE_PAGES = {
+  'smart-classroom':     'ห้องเรียนอัจฉริยะ — คู่มือเลือกและติดตั้งกระดานอัจฉริยะ',
+  'interactive-display': 'จอ interactive ทุกแบรนด์ — เปรียบเทียบและเลือกรุ่น',
+  'screen-installation': 'บริการรับติดตั้งจอ LED วิดีโอวอลล์ และป้ายดิจิทัล',
+  'cctv-installation':   'บริการรับติดตั้งกล้องวงจรปิดครบวงจร'
+};
+function servicesFor(brandId, groupSlug) {
+  const g = `${brandId}/${groupSlug}`;
+  if (/^(dahua\/Interactive-Whiteboards|samsung\/interactive-display|maxhub\/interactive-flat-panel)$/.test(g))
+    return ['smart-classroom', 'interactive-display'];
+  if (/^(dahua\/Display--Control|samsung\/(qled-8k-signage|uhd-4k-signage|video-wall|outdoor-signage)|maxhub\/(dvled|commercial-display))$/.test(g))
+    return ['screen-installation'];
+  if (/^dahua\/(Network-Cameras|HDCVI-Cameras|Thermal-Cameras|PTZ-Cameras|Wireless-Products|Network-Recorders|HDCVI-Recorders|Video-Intercoms|Access-Control|Alarms|Storage|Transmission|Accessories|Dedicated-Products|DE-2564|Explosion-Proof--Anti-Corrosion|Mobile)$/.test(g))
+    return ['cctv-installation'];
+  return [];
+}
+function serviceLinks(brandId, groupSlug) {
+  const list = servicesFor(brandId, groupSlug);
+  if (!list.length) return '';
+  return `<p class="service-links th">บริการที่เกี่ยวข้อง:
+    ${list.map(slug => `<a href="${landingUrl(slug)}">${esc(SERVICE_PAGES[slug])} ›</a>`).join(' ')}</p>`;
+}
+
 const SITE_URL = 'https://lallathailand.com';
 const TEL = '081-491-3538';
 
@@ -290,6 +316,8 @@ const PAGES = {
       </div>
     </section>` : ''}
 
+    ${serviceLinks(m.brand, m.group) ? `<section class="section-tight"><div class="wrap">${serviceLinks(m.brand, m.group)}</div></section>` : ''}
+
     ${contactCard('สนใจรุ่นนี้?', 'ปรึกษาผู้เชี่ยวชาญเพื่อประเมินหน้างานและใบเสนอราคา', true)}`;
   },
 
@@ -460,6 +488,7 @@ const PAGES = {
           ข้อมูลรุ่นและรูปภาพอ้างอิงจากเอกสารของ ${esc(brand.name)}
           — ติดต่อเราเพื่อสอบถามราคาและสต็อกสินค้าในประเทศไทย
         </p>
+        ${serviceLinks(brand.id, group.slug)}
       </div>
     </section>
 
@@ -542,6 +571,48 @@ const PAGES = {
 
     ${contactCard(`สนใจสินค้า ${brand.name}?`, 'แจ้งรุ่นหรือลักษณะงานที่ต้องการ เราช่วยเลือกและเสนอราคาให้', false)}`;
   }
+};
+
+/* ── Service / solution page (js/landing.js) ─────────────────── */
+PAGES.landing = function (p) {
+  return `
+    <section class="hero landing-hero" id="overview">
+      <div class="wrap hero-copy">
+        <nav class="t-eyebrow" aria-label="เส้นทาง">
+          <a class="crumb" href="index.html">หน้าแรก</a> · ${esc(p.eyebrow)}
+        </nav>
+        <h1 class="t-display">${esc(p.h1)}</h1>
+        <p class="t-lead th">${esc(p.lead)}</p>
+        <div class="cta-row">
+          <a class="link link-lg" href="tel:0814913538">โทร ${TEL}</a>
+          <a class="link link-lg" href="#faq">คำถามที่พบบ่อย</a>
+        </div>
+      </div>
+      ${p.image ? `<div class="hero-stage"><img src="${esc(p.image)}" alt="${esc(p.imageAlt || p.h1)}" /></div>` : ''}
+    </section>
+
+    ${p.sections.map((sec, i) => `
+    <section class="section${i % 2 ? ' bg-alt' : ''}" id="${esc(sec.id)}">
+      <div class="wrap">
+        <h2 class="t-title landing-h2">${esc(sec.h2)}</h2>
+        <div class="landing-body th">${sec.html}</div>
+      </div>
+    </section>`).join('')}
+
+    <section class="section${p.sections.length % 2 ? ' bg-alt' : ''}" id="faq">
+      <div class="wrap">
+        <h2 class="t-title landing-h2">คำถามที่พบบ่อย</h2>
+        <div class="faq th">
+          ${p.faq.map(f => `
+          <details class="faq-item">
+            <summary>${esc(f.q)}</summary>
+            <p>${esc(f.a)}</p>
+          </details>`).join('')}
+        </div>
+      </div>
+    </section>
+
+    ${contactCard('ปรึกษาและขอใบเสนอราคา', 'บอกเราว่าต้องการติดตั้งที่ไหน กี่จุด หรือขนาดเท่าไหร่ เราช่วยวางแผนและเสนอราคาให้', true)}`;
 };
 
 /* ── Browser-only wiring ────────────────────────────────────── */

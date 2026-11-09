@@ -133,6 +133,15 @@ function renderFooter() {
             </ul>
           </div>
           <div class="footer-col">
+            <h2>บริการ</h2>
+            <ul>
+              <li><a href="${landingUrl('screen-installation')}">รับติดตั้งจอ</a></li>
+              <li><a href="${landingUrl('cctv-installation')}">ติดตั้งกล้องวงจรปิด</a></li>
+              <li><a href="${landingUrl('smart-classroom')}">ห้องเรียนอัจฉริยะ</a></li>
+              <li><a href="${landingUrl('interactive-display')}">จอ interactive</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
             <h2>ข้อมูลทางเทคนิค</h2>
             <ul>
               <li><a href="${productUrl('dhi-phria2-5-pl', 'dahua')}#specs">Tech Specs</a></li>

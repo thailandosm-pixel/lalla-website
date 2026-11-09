@@ -27,7 +27,12 @@ at `product.html?id=…` pages that were empty to Google. The new sitemap lists
 2. Left menu → **Sitemaps**. If an old `sitemap.xml` is listed, that's fine -
    type `sitemap.xml` again and click **Submit** so it is re-read
 3. Top search bar → paste each URL below → **Request indexing** (one at a time;
-   Google allows ~10 a day, so start with these):
+   Google allows ~10 a day, so start with these - the four service pages first,
+   they target the words customers actually type):
+   - `https://lallathailand.com/smart-classroom.html`
+   - `https://lallathailand.com/screen-installation.html`
+   - `https://lallathailand.com/cctv-installation.html`
+   - `https://lallathailand.com/interactive-display.html`
    - `https://lallathailand.com/`
    - `https://lallathailand.com/dahua.html`
    - `https://lallathailand.com/dahua-network-cameras.html`
@@ -171,6 +176,29 @@ sales categories on your own site.
 
 ---
 
+## 10. Four answers that would make the service pages win more searches 🟡 reply in chat
+
+**Why Claude can't:** these are facts about your business that only you know.
+Claude will not put a claim on the site that isn't true.
+
+The new pages (ห้องเรียนอัจฉริยะ, รับติดตั้งจอ, ติดตั้งกล้องวงจรปิด, จอ interactive)
+compete with installers who show all four of these. Each one you can confirm
+goes straight onto the pages:
+
+1. **Is the site survey (สำรวจหน้างาน) free?** Competitors lead with
+   "สำรวจหน้างานฟรี". If yours is free too, say so - it's a strong reason to call.
+2. **How long is your installation warranty?** (e.g. 1 year on workmanship,
+   plus the manufacturer's warranty on the product)
+3. **A "starting from" price for common jobs?** e.g. "กระดานอัจฉริยะ 75 นิ้ว
+   พร้อมติดตั้ง เริ่มต้น ___ บาท", "กล้องวงจรปิด 4 ตัวพร้อมติดตั้ง เริ่มต้น ___ บาท".
+   People search "ราคา" constantly; a real starting price ranks and converts.
+4. **Photos of real installs** - especially an interactive board in a classroom
+   and a CCTV job. Your project list today has LED screens, a queue system and
+   stage hoists, but no classroom board or CCTV install, so those pages can't
+   show proof yet. Even 3-4 phone photos help.
+
+---
+
 ## Already done — nothing for you to do
 
 - ✅ Accessibility: 0 violations, checked automatically on every push, at both
@@ -188,4 +216,5 @@ sales categories on your own site.
 - ✅ Quote form sends for real; no more false success screen
 - ✅ Google Search Console TXT record added and live in DNS
 - ✅ Every product, category and brand has its own searchable page (2026-11-09)
+- ✅ Service pages for ห้องเรียนอัจฉริยะ, รับติดตั้งจอ, ติดตั้งกล้องวงจรปิด, จอ interactive (2026-11-09)
 - ✅ Internal notes (this file, CHANGELOG, README) no longer published on the site

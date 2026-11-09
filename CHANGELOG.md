@@ -7,6 +7,38 @@ Live site: https://lallathailand.com · Repo: thailandosm-pixel/lalla-website
 
 ---
 
+## 2026-11-09 — Service pages for the words customers actually search
+
+Model-number pages are easy to rank but almost nobody searches model numbers.
+Customers search for what they need done. Four new pages target those words,
+each with real Thai content, a FAQ, and structured data (Service + FAQPage +
+BreadcrumbList):
+
+| Page | Targets |
+|---|---|
+| `smart-classroom.html` | ห้องเรียนอัจฉริยะ, จอ interactive ห้องเรียน, กระดานอัจฉริยะ, สื่อการเรียนการสอนอิเล็กทรอนิกส์ |
+| `interactive-display.html` | จอ interactive, จอสัมผัส, จออินเตอร์แอคทีฟ (Dahua / Samsung / MAXHUB compared) |
+| `screen-installation.html` | รับติดตั้งจอ, ติดตั้งจอ LED, วิดีโอวอลล์, ป้ายดิจิทัล |
+| `cctv-installation.html` | ติดตั้งกล้องวงจรปิด, รับติดตั้งกล้องวงจรปิด, กล้องวงจรปิดครบวงจร |
+
+Content comes only from Lalla's own facts: the catalogue (e.g. Dahua LPH
+65/75/86″ boards at 37 / 51 / 64 kg, Android 15, 32-point touch), the
+company profile (authorised dealer, own crew nationwide, the 8-step process)
+and the real projects. Claims were checked against the data and four
+overstatements fixed before publishing. No prices, warranty lengths or
+"free survey" - those wait for the owner (YOUR-TASKS.md, task 10).
+
+Linked from: a new **บริการของเรา** section right after the home-page hero,
+a new **บริการ** footer column (on every page), and a "บริการที่เกี่ยวข้อง"
+line on all 762 related product and category pages.
+
+Content lives in `js/landing.js`; the template is `PAGES.landing` in
+`js/pages.js`. The build now also checks every internal link and image on
+every page (20,514 across 777 pages) and fails on any broken one - verified
+by injecting a typo'd product id.
+
+---
+
 ## 2026-11-09 — Every product is now a real, searchable page
 
 **The problem.** Every product, category and brand page was an empty shell:
